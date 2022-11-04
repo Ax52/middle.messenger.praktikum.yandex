@@ -1,9 +1,10 @@
+## Description
 This is messenger app, created under the review of Yandex Practicum members team.
 
 This messenger allows users to chat with each other fast and smoothly.
 
 As for now, it doesn't ready for use, but under active development.
-
+## Design
 You can view layout files on Figma from the link below:
 
 Link to figma files:
