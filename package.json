@@ -1,13 +1,19 @@
 {
-	"name": "messenger-app",
-	"version": "1.0.0",
-	"private": false,
-	"scripts": {
-		"start": "parcel index.html",
-		"build": "parcel build index.html" 
-	},
-	"dependencies": {
-		"parcel": "^2.7.0",
-		"sass": "^1.56.0"
-	}
+  "name": "messenger-app",
+  "version": "1.0.0",
+  "main": "./src/index.js",
+  "private": false,
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html"
+  },
+  "devDependencies": {
+    "sass": "^1.56.0",
+    "handlebars": "^4.7.7",
+    "parcel": "^2.7.0",
+    "@parcel/core": "^2.7.0",
+    "@parcel/config-default": "^2.7.0",
+    "@parcel/transformer-sass": "^2.7.0",
+    "parcel-transformer-hbs": "^1.0.4"
+  }
 }
