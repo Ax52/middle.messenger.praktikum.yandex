@@ -1,0 +1,104 @@
+html {
+  font-size: 16px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+body,
+body * {
+  margin: 0;
+  padding: 0;
+  display: block;
+  box-sizing: border-box;
+}
+#root {
+  width: 100vw;
+  height: 100vh;
+}
+
+// Variables
+$paper: #fff;
+$grey-paper: #f5f5f5;
+$light-grey: #bababa;
+$base-grey: #d9d9d9;
+$dark-grey: #8f8f8f;
+$red: red;
+$blue: #0075ff;
+$light-blue: #4db4ff;
+$card-border: 1px solid $light-grey;
+$border-radius: 25px;
+
+// Mixins
+@mixin wrapper-center {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin btn {
+  padding: 10px 20px;
+  font-size: 1rem;
+  min-width: 100px;
+}
+
+@mixin btn-text($color: $blue) {
+  padding: 0;
+  margin: 0;
+  border: 0;
+  background-color: transparent;
+  font-size: 1rem;
+  color: $color;
+  cursor: pointer;
+  &:active {
+    color: rgba($color, 0.5);
+  }
+}
+
+@mixin btn-outlined($color: $blue) {
+  @include btn;
+  color: $color;
+  border: 1px solid $color;
+  background-color: transparent;
+  &:active {
+    background-color: rgba($color, 0.1);
+  }
+}
+@mixin btn-contained($color: $blue) {
+  @include btn;
+  color: $paper;
+  border: 1px solid $color;
+  background-color: $color;
+  &:active {
+    background-color: rgba($color, 0.8);
+  }
+}
+
+@mixin card-frame {
+  padding: 40px 30px;
+  border: $card-border;
+  border-radius: 25px;
+}
+
+@mixin input-label {
+  color: $light-grey;
+  font-size: 0.75rem;
+}
+
+@mixin input-field {
+  padding: 3px 0;
+  border: none;
+  border-bottom: 1px solid $light-blue;
+  width: 100%;
+  outline: none;
+  &:focus {
+    background-color: rgba($light-blue, 0.1);
+  }
+}
+
+@mixin input-round {
+  padding: 0 10px;
+  border: none;
+  border-radius: $border-radius;
+  background-color: $base-grey;
+  color: $dark-grey;
+  height: 1.5rem;
+}
