@@ -1,0 +1,9 @@
+@use "~/src/index.scss" as global;
+
+.wrapper {
+  @include global.wrapper-center;
+  & .description {
+    color: global.$dark-grey;
+    font-size: 0.75rem;
+  }
+}
