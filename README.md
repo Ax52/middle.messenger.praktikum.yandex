@@ -8,6 +8,8 @@ As for now, it doesn't ready for use, but under active development.
 
 ## Overview
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/fad0dcbe-e71d-40a0-93a1-a0ef369a2684/deploy-status)](https://app.netlify.com/sites/tangerine-starlight-1349d8/deploys)
+
 You can view demo of this app, deployed on Netlify:
 https://tangerine-starlight-1349d8.netlify.app/
 
