@@ -16,13 +16,13 @@ https://tangerine-starlight-1349d8.netlify.app/
 ## Quick start
 
 First of all, you need to install required packages for front and back end
-(You may want to run "[npm | pnpm | yarn] i && cd backend && [npm | pnpm | yarn] i")
+(You may want to run "[npm|pnpm|yarn] i")
 
-To build this application simply use "[npm | pnpm | yarn] run build"
+To build this application simply use "[npm|pnpm|yarn] run build"
 
-To serve it from local express server, bo to the backend folder and use "[npm | pnpm | yarn] run start"
+To serve it from local express server, simply use "[npm|pnpm|yarn] run start"
 
-If you want to develop this project, start your work with "[npm | pnpm | yarn] run serve"
+If you want to develop this project, start your work with "[npm|pnpm|yarn] run serve"
 
 ## Design
 
