@@ -1,6 +1,6 @@
 import hbs from "./sidebar.hbs";
 import * as css from "./sidebar.module.scss";
-import { generateId } from "~/src/utils";
+import { generateId, routeTo } from "~/src/utils";
 import Handlebars from "handlebars";
 
 const chatsArr = [
@@ -44,8 +44,7 @@ export function Sidebar(root, selectedChatId) {
   // event listeners
   const settingsBtn = document.querySelector("#settings-btn");
   settingsBtn.onclick = () => {
-    const currentUrl = window.location.origin;
-    window.location = `${currentUrl}/chat/settings`;
+    routeTo("/chat/settings");
   };
 
   const chats = document.querySelectorAll(".item-chat-bar");
@@ -53,7 +52,7 @@ export function Sidebar(root, selectedChatId) {
     const id = chat.dataset.id;
     chat.onclick = () => {
       Sidebar(root, id);
-      window.location.href = `${window.location.origin}/chat/${id}`;
+      routeTo(`/chat/${id}`);
     };
   });
 }
