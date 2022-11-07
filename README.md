@@ -6,6 +6,11 @@ This messenger allows users to chat with each other fast and smoothly.
 
 As for now, it doesn't ready for use, but under active development.
 
+## Overview
+
+You can view demo of this app, deployed on Netlify:
+https://tangerine-starlight-1349d8.netlify.app/
+
 ## Quick start
 
 First of all, you need to install required packages for front and back end
@@ -15,7 +20,7 @@ To build this application simply use "[npm | pnpm | yarn] run build"
 
 To serve it from local express server, bo to the backend folder and use "[npm | pnpm | yarn] run start"
 
-If you want to develop this project, start your work with "[npm | pnpm | yarn] run start"
+If you want to develop this project, start your work with "[npm | pnpm | yarn] run serve"
 
 ## Design
 
