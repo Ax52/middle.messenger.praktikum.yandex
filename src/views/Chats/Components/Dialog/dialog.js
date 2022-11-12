@@ -1,7 +1,6 @@
 import hbs from "./dialog.hbs";
 import * as css from "./dialog.module.scss";
 import Handlebars from "handlebars";
-import { fitInput } from "./utils";
 
 const username = "Sergio";
 const messages = [
@@ -30,5 +29,4 @@ export function Dialog(root) {
 
   // render
   root.innerHTML = hbs({ css, username, messages });
-  fitInput();
 }
