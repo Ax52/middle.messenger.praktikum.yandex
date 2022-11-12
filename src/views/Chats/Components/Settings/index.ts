@@ -1,1 +1,1 @@
-export { SettingsPage as default } from "./settings.js";
+export { SettingsPage as default } from "./settings";
