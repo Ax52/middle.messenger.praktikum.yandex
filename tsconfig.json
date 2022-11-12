@@ -2,16 +2,16 @@
   "include": ["./*.ts", "src", "types"],
   "exclude": ["node_modules", "**/*.spec.ts"],
   "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "~*": ["./*"]
+    },
     "noImplicitAny": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "sourceMap": true,
     "strictNullChecks": true,
 
-    "baseUrl": ".",
-    "paths": {
-      "~*": ["./*"]
-    },
     "lib": ["ESNext", "DOM"],
     "module": "ESNext",
     "moduleResolution": "NodeNext",
@@ -30,6 +30,7 @@
     "isolatedModules": true,
     "checkJs": true,
     "experimentalDecorators": true,
-    "allowJs": true // FIXIT:change to false
+    "allowJs": true, // FIXIT:change to false
+    "allowSyntheticDefaultImports": true
   }
 }
