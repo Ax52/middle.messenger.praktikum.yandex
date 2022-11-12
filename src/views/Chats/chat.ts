@@ -1,11 +1,11 @@
 import hbs from "./chat.hbs";
-import * as css from "./chat.module.scss";
+import css from "./chat.module.scss";
 import Sidebar from "./Components/Sidebar";
 import Dialog from "./Components/Dialog";
 import EmptyDialog from "./Components/EmptyDialog";
 import Settings from "./Components/Settings";
 
-export function ChatPage(root) {
+export function ChatPage(root: HTMLElement) {
   const location = window.location.pathname.replace("/chat", "");
 
   // render
@@ -16,18 +16,22 @@ export function ChatPage(root) {
   const viewNode = document.querySelector("#view");
 
   // render sidebar
-  Sidebar(sBarNode);
+  if (sBarNode instanceof HTMLElement) {
+    Sidebar(sBarNode);
+  }
   // render mainscreen
-  switch (location) {
-    case "/settings":
-      Settings(viewNode);
-      break;
-    case "/":
-    case "":
-      EmptyDialog(viewNode);
-      break;
-    default:
-      Dialog(viewNode);
-      break;
+  if (viewNode instanceof HTMLElement) {
+    switch (location) {
+      case "/settings":
+        Settings(viewNode);
+        break;
+      case "/":
+      case "":
+        EmptyDialog(viewNode);
+        break;
+      default:
+        Dialog(viewNode);
+        break;
+    }
   }
 }
