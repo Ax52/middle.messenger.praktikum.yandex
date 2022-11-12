@@ -5,40 +5,40 @@
   position: relative;
 }
 .title {
+  @include global.cloudy-glass;
   position: absolute;
   top: 0;
   padding: 25px;
   width: 100%;
   height: 80px;
   border-bottom: 1px solid global.$dark-grey;
-  background-color: global.$paper;
   z-index: 10;
 }
 .feed-wrapper {
   height: 100%;
   max-height: 100%;
   overflow-y: auto;
+  display: flex;
+  flex-direction: column-reverse;
   &::-webkit-scrollbar {
     display: none;
   }
-  display: flex;
-  flex-direction: column-reverse;
 }
 .feed {
   padding: 20px;
+  margin-top: 80px;
   margin-bottom: 50px;
   display: flex;
   flex-direction: column;
 }
 
 .message-input {
+  @include global.cloudy-glass;
   position: absolute;
   bottom: 0;
   padding: 10px 20px;
   z-index: 10;
   width: 100%;
-  background-color: rgba(global.$paper, 0.5);
-  backdrop-filter: blur(2px);
   & > input {
     width: 100%;
     @include global.input-round;
