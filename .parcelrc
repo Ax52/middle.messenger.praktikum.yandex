@@ -3,6 +3,9 @@
   "transformers": {
     "*.hbs": [
       "parcel-transformer-hbs"
+    ],
+    "*.ts": [
+      "@parcel/transformer-typescript-tsc"
     ]
   }
 }
