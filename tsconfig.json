@@ -1,4 +1,6 @@
 {
+  "include": ["./*.ts", "src", "types"],
+  "exclude": ["node_modules", "**/*.spec.ts"],
   "compilerOptions": {
     "noImplicitAny": true,
     "noUnusedLocals": true,
@@ -6,11 +8,15 @@
     "sourceMap": true,
     "strictNullChecks": true,
 
-    "lib": ["ESNext"],
+    "baseUrl": ".",
+    "paths": {
+      "~*": ["./*"]
+    },
+    "lib": ["ESNext", "DOM"],
     "module": "ESNext",
+    "moduleResolution": "NodeNext",
     "target": "ESNext",
     "strict": true,
-    "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "allowUnusedLabels": false,
@@ -21,6 +27,9 @@
     "noImplicitReturns": true,
     "noUncheckedIndexedAccess": true,
     "importsNotUsedAsValues": "error",
-    "checkJs": true
+    "isolatedModules": true,
+    "checkJs": true,
+    "experimentalDecorators": true,
+    "allowJs": true // FIXIT:change to false
   }
 }
