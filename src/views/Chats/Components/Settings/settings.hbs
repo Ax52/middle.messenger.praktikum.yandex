@@ -1,0 +1,66 @@
+<div class="{{css.wrapper}}">
+  <div class="{{css.frame}}">
+    <div class="{{css.header}}">
+      <h1>Settings</h1>
+    </div>
+    <form id="form-settings">
+      <div class="{{css.inputs}}">
+        <div class="{{css.avatar}}">
+          <div class="{{css.no-avatar}}">
+            <input class="{{css.input-avatar}}" type="file" name="avatar" />
+          </div>
+        </div>
+        <label for="first_name">
+          <input name="first_name" id="first_name" />
+          First Name
+        </label>
+        <label for="second_name">
+          <input name="second_name" id="second_name" />
+          Second Name
+        </label>
+
+        <label for="login">
+          <input name="login" id="login" />
+          Login
+        </label>
+        <label for="email">
+          <input name="email" id="email" />
+          Email
+        </label>
+        {{#if passwordCorrect}}
+          <label for="new-password">
+            <input
+              name="new-password"
+              id="new-password"
+              autocomplete="off"
+              type="password"
+            />
+            New Password
+          </label>
+        {{else}}
+          <label for="old-password">
+            <input
+              name="old-password"
+              id="old-password"
+              placeholder="Enter your old password to reset"
+              autocomplete="off"
+              type="password"
+            />
+            Old Password
+          </label>
+        {{/if}}
+        <label for="phone">
+          <input name="phone" id="phone" />
+          Phone
+        </label>
+      </div>
+      <div class="{{css.flexBtns}}">
+        <button id="cancel-btn" class="{{css.outlinedBtnRed}}">Cancel</button>
+        <button id="save-btn" class="{{css.containedBtn}}">Save</button>
+      </div>
+      <div class="{{css.logout}}">
+        <button id="logout-btn" class="{{css.containedBtnRed}}">Logout</button>
+      </div>
+    </form>
+  </div>
+</div>

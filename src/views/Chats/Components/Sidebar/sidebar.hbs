@@ -1,0 +1,26 @@
+<div class="{{css.sidebar}}">
+  <div class="{{css.primary-bar}}">
+    <div class="{{css.row-btns}}">
+      <button id="new-dialog">New</button>
+      <button id="settings-btn">Settings</button>
+    </div>
+    <form id="search-dialog">
+      <input placeholder="Search" class="{{css.search-input}}" />
+    </form>
+  </div>
+  <ul>
+    {{#each chatsArr}}
+      <li class="{{../css.dialog-preview}}">
+        <div class="{{../css.item-chat-bar}} item-chat-bar {{#if (isChatSelected id)}}{{../css.selected-chat}}{{/if}}" data-id="{{id}}">
+          <div class="{{../css.row-btns}}">
+            <h4>{{username}}</h4>
+            {{#if unread}}
+              <div class="{{../css.unread-indicator}}"></div>
+            {{/if}}
+          </div>
+          <p class="{{../css.preview}}">{{preview}}</p>
+        </div>
+      </li>
+    {{/each}}
+  </ul>
+</div>

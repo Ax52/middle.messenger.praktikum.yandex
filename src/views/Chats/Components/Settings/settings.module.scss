@@ -1,0 +1,70 @@
+@use "~/src/index.scss" as global;
+.wrapper {
+  @include global.wrapper-center;
+}
+.frame {
+  @include global.card-frame;
+}
+.header {
+  display: flex;
+  justify-content: center;
+}
+.flexBtns {
+  margin-top: 40px;
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+.input-avatar {
+  visibility: hidden;
+}
+
+.inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  & > label {
+    @include global.input-label;
+    & > input {
+      @include global.input-field;
+      &::placeholder {
+        color: global.$light-grey;
+        font-size: 0.75rem;
+      }
+    }
+  }
+}
+.outlinedBtnRed {
+  @include global.btn-outlined(global.$red);
+}
+.containedBtnRed {
+  @include global.btn-contained(global.$red);
+}
+.containedBtn {
+  @include global.btn-contained;
+}
+
+.logout {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.avatar {
+  margin: 20px auto;
+  & .no-avatar {
+    width: 50px;
+    height: 50px;
+    background-color: global.$base-grey;
+    position: relative;
+    &::before {
+      content: "Avatar";
+      font-size: 0.75rem;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      translate: -50% -50%;
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "name": "messenger-app",
+  "version": "1.0.0",
+  "engines": {
+    "node": ">=16.13.2"
+  },
+  "browserslist": "> 0.5%, last 2 versions, not dead",
+  "scripts": {
+    "start": "npm run build && node server.js",
+    "serve": "parcel index.html",
+    "build": "parcel build index.html && rm -rf .parcel-cache"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "handlebars": "^4.7.7"
+  },
+  "devDependencies": {
+    "@parcel/config-default": "^2.7.0",
+    "@parcel/core": "^2.7.0",
+    "@parcel/transformer-sass": "^2.7.0",
+    "parcel": "^2.7.0",
+    "parcel-transformer-hbs": "^1.0.4",
+    "sass": "^1.56.0"
+  }
+}
