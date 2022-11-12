@@ -3,34 +3,30 @@
   "exclude": ["node_modules", "**/*.spec.ts"],
   "compilerOptions": {
     "baseUrl": ".",
-    "paths": {
-      "~*": ["./*"]
-    },
+    "strict": true,
+    "allowJs": false,
+    "sourceMap": true,
+    "target": "ESNext",
+    "module": "ESNext",
+    "skipLibCheck": true,
     "noImplicitAny": true,
     "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "sourceMap": true,
+    "isolatedModules": true,
     "strictNullChecks": true,
-
     "lib": ["ESNext", "DOM"],
-    "module": "ESNext",
-    "moduleResolution": "NodeNext",
-    "target": "ESNext",
-    "strict": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "allowUnusedLabels": false,
-    "allowUnreachableCode": false,
-    "exactOptionalPropertyTypes": true,
-    "noFallthroughCasesInSwitch": true,
-    "noImplicitOverride": true,
     "noImplicitReturns": true,
+    "paths": { "~*": ["./*"] },
+    "noUnusedParameters": true,
+    "allowUnusedLabels": false,
+    "noImplicitOverride": true,
+    "allowUnreachableCode": false,
+    "experimentalDecorators": true,
+    "moduleResolution": "NodeNext",
     "noUncheckedIndexedAccess": true,
     "importsNotUsedAsValues": "error",
-    "isolatedModules": true,
-    "checkJs": true,
-    "experimentalDecorators": true,
-    "allowJs": true, // FIXIT:change to false
-    "allowSyntheticDefaultImports": true
+    "exactOptionalPropertyTypes": true,
+    "noFallthroughCasesInSwitch": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true
   }
 }
