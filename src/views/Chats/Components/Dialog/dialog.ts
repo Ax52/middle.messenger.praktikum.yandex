@@ -1,5 +1,5 @@
 import hbs from "./dialog.hbs";
-import * as css from "./dialog.module.scss";
+import css from "./dialog.module.scss";
 import Handlebars from "handlebars";
 
 const username = "Sergio";
@@ -24,7 +24,7 @@ const messages = [
   },
 ];
 
-export function Dialog(root) {
+export function Dialog(root: HTMLElement) {
   Handlebars.registerHelper("isYourMessage", (v) => v !== "you");
 
   // render
