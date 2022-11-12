@@ -1,5 +1,5 @@
 <div class="{{css.sidebar}}">
-  <div calss="{{css.dialogs}}">
+  <div class="{{css.dialogs}}">
     <ul>
       <li>
         <div class="{{css.primary-bar}}">
@@ -7,7 +7,9 @@
             <button id="new-dialog">New</button>
             <button id="settings-btn">Settings</button>
           </div>
-          <input placeholder="Search" />
+          <form id="search-dialog">
+            <input placeholder="Search" class="{{css.search-input}}" />
+          </form>
         </div>
       </li>
       {{#each chatsArr}}

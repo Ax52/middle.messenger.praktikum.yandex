@@ -3,10 +3,11 @@
   height: 100%;
   background-color: global.$grey-paper;
 }
-
-ul > * {
-  height: 80px;
-  border-bottom: 1px solid global.$dark-grey;
+.dialogs {
+  & > ul > * {
+    height: 80px;
+    border-bottom: 1px solid global.$dark-grey;
+  }
 }
 
 .bar {
@@ -26,9 +27,11 @@ ul > * {
       @include global.btn-text;
     }
   }
-  & > input {
-    @include global.input-round;
-  }
+}
+
+.search-input {
+  @include global.input-round;
+  width: 100%;
 }
 
 .item-chat-bar {

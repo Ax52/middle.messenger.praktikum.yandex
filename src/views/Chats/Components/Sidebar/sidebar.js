@@ -55,4 +55,9 @@ export function Sidebar(root, selectedChatId) {
       routeTo(`/chat/${id}`);
     };
   });
+
+  const searchForm = document.querySelector("#search-dialog");
+  searchForm.onsubmit = (e) => {
+    e.preventDefault();
+  };
 }

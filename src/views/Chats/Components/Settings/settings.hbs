@@ -29,7 +29,12 @@
         </label>
         {{#if passwordCorrect}}
           <label for="new-password">
-            <input name="new-password" id="new-password" autocomplete="off" />
+            <input
+              name="new-password"
+              id="new-password"
+              autocomplete="off"
+              type="password"
+            />
             New Password
           </label>
         {{else}}
@@ -39,6 +44,7 @@
               id="old-password"
               placeholder="Enter your old password to reset"
               autocomplete="off"
+              type="password"
             />
             Old Password
           </label>
