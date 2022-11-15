@@ -7,6 +7,8 @@ declare module "*.hbs" {
   type props = {
     [key: string]: string | number | Array<T> | Record<string, string>;
   };
-  const hbs = (props: props) => string;
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const hbs = (p: props) => string;
   export default hbs;
 }
