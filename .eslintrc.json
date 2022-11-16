@@ -19,6 +19,7 @@
   "plugins": ["@typescript-eslint"],
   "parser": "@typescript-eslint/parser",
   "rules": {
+    "no-restricted-exports": "off",
     "import/prefer-default-export": "off",
     "no-param-reassign": ["error", { "props": false }],
     "no-debugger": "warn",

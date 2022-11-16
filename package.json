@@ -8,7 +8,7 @@
   "scripts": {
     "start": "npm run build && node server.js",
     "serve": "parcel index.html",
-    "lint": "eslint **/*.ts",
+    "lint": "eslint **/*.ts && tsc --noEmit",
     "build": "parcel build index.html && rm -rf .parcel-cache"
   },
   "dependencies": {
