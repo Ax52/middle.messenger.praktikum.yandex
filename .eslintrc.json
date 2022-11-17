@@ -19,6 +19,8 @@
   "plugins": ["@typescript-eslint"],
   "parser": "@typescript-eslint/parser",
   "rules": {
+    "class-methods-use-this": "off",
+    "no-underscore-dangle": "off",
     "no-restricted-exports": "off",
     "import/prefer-default-export": "off",
     "no-param-reassign": ["error", { "props": false }],
