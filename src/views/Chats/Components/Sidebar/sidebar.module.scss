@@ -1,15 +1,17 @@
 @use "~/src/index.scss" as global;
+
 .sidebar {
   height: 100vh;
   background-color: global.$grey-paper;
   overflow-y: overlay;
+
   &::-webkit-scrollbar-thumb {
     border-top: 80px solid transparent;
     border-bottom: 100vh solid global.$dark-grey;
   }
 }
 
-.bar {
+%bar {
   height: 80px;
   border-bottom: 1px solid global.$dark-grey;
   padding: 10px 20px;
@@ -19,14 +21,17 @@
 }
 
 .primary-bar {
-  @extend .bar;
+  @extend %bar;
   @include global.cloudy-glass;
+
   position: sticky;
   top: 0;
   z-index: 10;
+
   & .row-btns {
     display: flex;
     justify-content: space-between;
+
     & > button {
       @include global.btn-text;
     }
@@ -35,13 +40,16 @@
 
 .search-input {
   @include global.input-round;
+
   width: 100%;
 }
 
-.item-chat-bar {
-  @extend .bar;
+%item-chat-bar {
+  @extend %bar;
+
   cursor: pointer;
   position: relative;
+
   & .unread-indicator {
     position: absolute;
     top: 10px;
@@ -53,8 +61,13 @@
   }
 }
 
+.item-chat-bar {
+  @extend %item-chat-bar;
+}
+
 .selected-chat {
-  @extend .item-chat-bar;
+  @extend %item-chat-bar;
+
   background-color: global.$paper;
 }
 

@@ -1,15 +1,19 @@
 @use "~/src/index.scss" as global;
+
 .wrapper {
   @include global.wrapper-center;
 }
+
 .frame {
   @include global.card-frame;
 }
+
 .header {
   display: flex;
   justify-content: center;
 }
-.flexBtns {
+
+.flex-btns {
   margin-top: 40px;
   display: flex;
   justify-content: space-between;
@@ -24,10 +28,13 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
+
   & > label {
     @include global.input-label;
+
     & > input {
       @include global.input-field;
+
       &::placeholder {
         color: global.$light-grey;
         font-size: 0.75rem;
@@ -35,13 +42,16 @@
     }
   }
 }
-.outlinedBtnRed {
+
+.outlined-btn-red {
   @include global.btn-outlined(global.$red);
 }
-.containedBtnRed {
+
+.contained-btn-red {
   @include global.btn-contained(global.$red);
 }
-.containedBtn {
+
+.contained-btn {
   @include global.btn-contained;
 }
 
@@ -53,11 +63,13 @@
 
 .avatar {
   margin: 20px auto;
+
   & .no-avatar {
     width: 50px;
     height: 50px;
     background-color: global.$base-grey;
     position: relative;
+
     &::before {
       content: "Avatar";
       font-size: 0.75rem;

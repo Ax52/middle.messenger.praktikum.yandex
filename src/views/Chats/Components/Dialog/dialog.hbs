@@ -6,7 +6,7 @@
     <div class="{{css.feed}}">
       {{#each messages}}
         <div
-          class="{{#if (isYourMessage author)}}{{../css.incomeMessage}}{{else}}{{../css.yourMessage}}{{/if}}"
+          class="{{#if (isYourMessage author)}}{{../css.income-message}}{{else}}{{../css.your-message}}{{/if}}"
           data-time="{{time}}"
         >
           <p>{{message}}</p>
