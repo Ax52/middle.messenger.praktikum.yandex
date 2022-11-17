@@ -1,6 +1,6 @@
 import hbs from "./settings.hbs";
 import css from "./settings.module.scss";
-import { routeTo } from "~/src/utils";
+import { routeTo } from "../../../../utils";
 
 export function SettingsPage(root: HTMLElement) {
   // render

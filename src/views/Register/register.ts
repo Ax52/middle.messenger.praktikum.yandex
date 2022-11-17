@@ -6,7 +6,7 @@ export function RegisterPage(root: HTMLElement) {
   // render
   root.innerHTML = hbs({ css });
 
-  //event listeners
+  // event listeners
   const form = document.querySelector("#form-register");
   if (form instanceof HTMLFormElement) {
     form.onsubmit = (e) => {

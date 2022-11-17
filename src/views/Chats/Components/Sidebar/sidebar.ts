@@ -1,7 +1,7 @@
+import Handlebars from "handlebars";
+import { /* generateId, */ routeTo } from "../../../../utils";
 import hbs from "./sidebar.hbs";
 import css from "./sidebar.module.scss";
-import { /* generateId, */ routeTo } from "~/src/utils";
-import Handlebars from "handlebars";
 
 const chatsArr = [
   {
@@ -34,7 +34,7 @@ export function Sidebar(root: HTMLElement, selectedChatId?: string) {
   // register helpers
   Handlebars.registerHelper("isChatSelected", (v) => {
     const pathArr = window.location.pathname.split("/");
-    let chatId = pathArr[1] === "chat" ? pathArr[2] : undefined;
+    const chatId = pathArr[1] === "chat" ? pathArr[2] : undefined;
     return v === chatId || v === selectedChatId;
   });
 
@@ -53,7 +53,7 @@ export function Sidebar(root: HTMLElement, selectedChatId?: string) {
     document.querySelectorAll(".item-chat-bar");
   if (chats) {
     chats.forEach((chat) => {
-      const id = chat.dataset.id;
+      const { id } = chat.dataset;
       chat.onclick = () => {
         Sidebar(root, id);
         routeTo(`/chat/${id}`);

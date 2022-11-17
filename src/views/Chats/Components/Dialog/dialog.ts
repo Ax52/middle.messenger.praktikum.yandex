@@ -1,6 +1,6 @@
+import Handlebars from "handlebars";
 import hbs from "./dialog.hbs";
 import css from "./dialog.module.scss";
-import Handlebars from "handlebars";
 
 const username = "Sergio";
 const messages = [
