@@ -9,6 +9,6 @@ declare module "*.hbs" {
   };
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const hbs = (p: props) => string;
+  const hbs = (p: props): string => string;
   export default hbs;
 }
