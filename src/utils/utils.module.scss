@@ -1,0 +1,9 @@
+@use "~/src/index.scss" as global;
+
+.input-error {
+  background-color: rgba(global.$red, 0.2);
+
+  &:focus {
+    background-color: rgba(global.$red, 0.2) !important;
+  }
+}
