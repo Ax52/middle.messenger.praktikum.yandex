@@ -30,7 +30,7 @@ export function ChatPage(root: HTMLElement) {
         EmptyDialog(viewNode);
         break;
       default:
-        Dialog(viewNode);
+        new Dialog(viewNode);
         break;
     }
   }
