@@ -1,5 +1,5 @@
 import Handlebars from "handlebars";
-import { /* generateId, */ routeTo } from "../../../../utils";
+import { /* generateId, */ routeTo, validateForm } from "../../../../utils";
 import hbs from "./sidebar.hbs";
 import css from "./sidebar.module.scss";
 
@@ -61,10 +61,16 @@ export function Sidebar(root: HTMLElement, selectedChatId?: string) {
     });
   }
 
+  // event listeners
   const searchForm = document.querySelector("#search-dialog");
   if (searchForm instanceof HTMLFormElement) {
-    searchForm.onsubmit = (e) => {
-      e.preventDefault();
+    searchForm.onsubmit = async (e) => {
+      try {
+        await validateForm(e);
+        // filterDialogs();
+      } catch (err: unknown) {
+        console.error("Error with search form: ", err);
+      }
     };
   }
 }

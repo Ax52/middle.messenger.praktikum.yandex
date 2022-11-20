@@ -1,6 +1,6 @@
 import hbs from "./login.hbs";
 import css from "./login.module.scss";
-import { routeTo } from "../../utils";
+import { routeTo, validateForm } from "../../utils";
 
 export function LoginPage(root: HTMLElement) {
   // render
@@ -9,8 +9,13 @@ export function LoginPage(root: HTMLElement) {
   // event listeners
   const form = document.querySelector("#form-login");
   if (form instanceof HTMLFormElement) {
-    form.onsubmit = (e) => {
-      e.preventDefault();
+    form.onsubmit = async (e) => {
+      try {
+        await validateForm(e);
+        // routeTo("/chat");
+      } catch (err: unknown) {
+        console.error("Error with login form: ", err);
+      }
     };
   }
 
@@ -18,13 +23,6 @@ export function LoginPage(root: HTMLElement) {
   if (signUpBtn instanceof HTMLElement) {
     signUpBtn.onclick = () => {
       routeTo("/register");
-    };
-  }
-
-  const loginBtn = document.querySelector("#sign-in-btn");
-  if (loginBtn instanceof HTMLElement) {
-    loginBtn.onclick = () => {
-      routeTo("/chat");
     };
   }
 }
