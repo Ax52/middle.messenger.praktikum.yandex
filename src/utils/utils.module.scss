@@ -7,3 +7,15 @@
     background-color: rgba(global.$red, 0.2) !important;
   }
 }
+
+label:has(> .input-error) {
+  position: relative;
+
+  &::after {
+    content: "This field is invalid";
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    color: rgba(global.$red, 0.4);
+  }
+}
