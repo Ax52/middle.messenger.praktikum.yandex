@@ -2,9 +2,28 @@ import hbs from "./login.hbs";
 import css from "./login.module.scss";
 import { routeTo, validateForm } from "../../utils";
 
+import { Button } from "../../Components";
+
 export function LoginPage(root: HTMLElement) {
+  const test = new Button(root, {
+    text: "Go to chat",
+    id: "simeBtn23",
+    clx: [css["outlined-btn"]],
+    listeners: [
+      {
+        event: "click",
+        callback: () => {
+          routeTo("/chat");
+        },
+      },
+    ],
+  });
+
   // render
-  root.innerHTML = hbs({ css });
+  root.innerHTML = hbs({
+    css,
+    test: test.render(),
+  });
 
   // event listeners
   const form = document.querySelector("#form-login");

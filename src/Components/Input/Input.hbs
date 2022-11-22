@@ -1,0 +1,10 @@
+<label for="{{for}}">
+  <input
+    name="{{name}}"
+    id="{{id}}"
+    placeholder="{{placeholder}}"
+    class="{{#each clx}}{{this}} {{/each}}"
+    {{#each attrs}}{{tag}}="{{value}}"{{/each}}
+  />
+    {{text}}
+  </label>

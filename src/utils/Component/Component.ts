@@ -7,23 +7,26 @@ type TEvent = {
 };
 
 /* eslint-disable @typescript-eslint/no-empty-function */
-export abstract class Component<T = unknown> {
+export abstract class Component<TState = unknown> {
   #events = {
     init: "init",
     cdm: "componentDidMount",
     cr: "componentRender",
   } as const;
 
-  #root: HTMLElement;
+  #root?: HTMLElement;
 
-  state?: T;
+  state?: TState;
+
+  #props?: Record<string, unknown>;
 
   #eventBus: () => EventBus;
 
-  constructor(root: HTMLElement) {
+  constructor(root?: HTMLElement, props?: Record<string, unknown>) {
     const eventBus: EventBus = new EventBus(root);
     this.#root = root;
-    this.state = this.init() as unknown as T;
+    this.#props = props;
+    this.state = this.init() as unknown as TState;
     this.#eventBus = () => eventBus;
 
     this.#registerEvents(eventBus);
@@ -41,14 +44,15 @@ export abstract class Component<T = unknown> {
     this.init();
     this.#eventBus().emit(this.#events.cr);
     const eventsArr: TEvent[] | undefined =
-      this.addEvents() as unknown as TEvent[];
+      (this.#props?.listeners as TEvent[]) ??
+      (this.addEvents() as unknown as TEvent[]);
 
     if (!eventsArr?.length) {
       return;
     }
 
     eventsArr.forEach(({ event, targetId, callback }) => {
-      const cb = <B>(e: B) => {
+      const cb = <T>(e: T) => {
         const ev = e as SubmitEvent;
         if (ev?.target === document.querySelector(targetId)) {
           callback(ev);
@@ -68,7 +72,9 @@ export abstract class Component<T = unknown> {
 
   #render() {
     const block = this.render();
-    this.#root.innerHTML = block;
+    if (this.#root) {
+      this.#root.innerHTML = block;
+    }
     this.#eventBus().emit(this.#events.cdm);
   }
 
@@ -78,7 +84,7 @@ export abstract class Component<T = unknown> {
 
   addEvents() {}
 
-  setState(newData: T | ((oldState?: T) => T)) {
+  setState(newData: TState | ((oldState?: TState) => TState)) {
     if (newData instanceof Function) {
       Object.assign(this.state ?? {}, newData(this.state));
     } else {
