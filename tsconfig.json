@@ -1,0 +1,32 @@
+{
+  "include": ["./*.ts", "src", "types"],
+  "exclude": ["node_modules", "**/*.spec.ts"],
+  "compilerOptions": {
+    "noImplicitAny": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "sourceMap": true,
+    "strictNullChecks": true,
+
+    "baseUrl": ".",
+    "strict": true,
+    "allowJs": false,
+    "target": "ESNext",
+    "module": "ESNext",
+    "skipLibCheck": true,
+    "isolatedModules": true,
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
+    "noImplicitReturns": true,
+    "paths": { "~*": ["./*"] },
+    "allowUnusedLabels": false,
+    "noImplicitOverride": true,
+    "allowUnreachableCode": false,
+    "experimentalDecorators": true,
+    "moduleResolution": "NodeNext",
+    "noUncheckedIndexedAccess": true,
+    "importsNotUsedAsValues": "error",
+    "noFallthroughCasesInSwitch": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true
+  }
+}

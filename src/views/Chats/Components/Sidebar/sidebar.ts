@@ -1,7 +1,7 @@
-import hbs from "./sidebar.hbs";
-import * as css from "./sidebar.module.scss";
-import { generateId, routeTo } from "~/src/utils";
 import Handlebars from "handlebars";
+import { /* generateId, */ routeTo, validateForm } from "../../../../utils";
+import hbs from "./sidebar.hbs";
+import css from "./sidebar.module.scss";
 
 const chatsArr = [
   {
@@ -30,11 +30,11 @@ const chatsArr = [
   },
 ];
 
-export function Sidebar(root, selectedChatId) {
+export function Sidebar(root: HTMLElement, selectedChatId?: string) {
   // register helpers
   Handlebars.registerHelper("isChatSelected", (v) => {
     const pathArr = window.location.pathname.split("/");
-    let chatId = pathArr[1] === "chat" ? pathArr[2] : undefined;
+    const chatId = pathArr[1] === "chat" ? pathArr[2] : undefined;
     return v === chatId || v === selectedChatId;
   });
 
@@ -43,21 +43,34 @@ export function Sidebar(root, selectedChatId) {
 
   // event listeners
   const settingsBtn = document.querySelector("#settings-btn");
-  settingsBtn.onclick = () => {
-    routeTo("/chat/settings");
-  };
-
-  const chats = document.querySelectorAll(".item-chat-bar");
-  chats.forEach((chat) => {
-    const id = chat.dataset.id;
-    chat.onclick = () => {
-      Sidebar(root, id);
-      routeTo(`/chat/${id}`);
+  if (settingsBtn instanceof HTMLElement) {
+    settingsBtn.onclick = () => {
+      routeTo("/chat/settings");
     };
-  });
+  }
 
+  const chats: NodeListOf<HTMLElement> =
+    document.querySelectorAll(".item-chat-bar");
+  if (chats) {
+    chats.forEach((chat) => {
+      const { id } = chat.dataset;
+      chat.onclick = () => {
+        Sidebar(root, id);
+        routeTo(`/chat/${id}`);
+      };
+    });
+  }
+
+  // event listeners
   const searchForm = document.querySelector("#search-dialog");
-  searchForm.onsubmit = (e) => {
-    e.preventDefault();
-  };
+  if (searchForm instanceof HTMLFormElement) {
+    searchForm.onsubmit = async (e) => {
+      try {
+        await validateForm(e);
+        // filterDialogs();
+      } catch (err: unknown) {
+        console.error("Error with search form: ", err);
+      }
+    };
+  }
 }

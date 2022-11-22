@@ -1,16 +1,20 @@
 @use "~/src/index.scss" as global;
+
 .wrapper {
   @include global.wrapper-center;
 }
+
 .frame {
   @include global.card-frame;
 }
+
 .header {
   margin-bottom: 40px;
   display: flex;
   justify-content: center;
 }
-.flexBtns {
+
+.flex-btns {
   margin-top: 40px;
   display: flex;
   justify-content: space-between;
@@ -21,17 +25,20 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
+
   & > label {
     @include global.input-label;
+
     & > input {
       @include global.input-field;
     }
   }
 }
 
-.outlinedBtn {
+.outlined-btn {
   @include global.btn-outlined;
 }
-.containedBtn {
+
+.contained-btn {
   @include global.btn-contained;
 }

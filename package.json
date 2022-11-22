@@ -8,6 +8,7 @@
   "scripts": {
     "start": "npm run build && node server.js",
     "serve": "parcel index.html",
+    "lint": "echo 'Eslint check' && eslint '**/*.ts' && echo 'TypeScript check' && tsc --noEmit && echo 'StyleLint check' && stylelint '**/*.scss'",
     "build": "parcel build index.html && rm -rf .parcel-cache"
   },
   "dependencies": {
@@ -15,11 +16,23 @@
     "handlebars": "^4.7.7"
   },
   "devDependencies": {
-    "@parcel/config-default": "^2.7.0",
-    "@parcel/core": "^2.7.0",
-    "@parcel/transformer-sass": "^2.7.0",
-    "parcel": "^2.7.0",
+    "@parcel/config-default": "^2.8.0",
+    "@parcel/core": "^2.8.0",
+    "@parcel/transformer-sass": "^2.8.0",
+    "@typescript-eslint/eslint-plugin": "^5.42.1",
+    "@typescript-eslint/parser": "^5.42.1",
+    "eslint": "^8.27.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.26.0",
+    "parcel": "^2.8.0",
     "parcel-transformer-hbs": "^1.0.4",
-    "sass": "^1.56.0"
+    "postcss": "^8.4.19",
+    "prettier": "^2.7.1",
+    "sass": "^1.56.1",
+    "stylelint": "^14.15.0",
+    "stylelint-config-prettier-scss": "^0.0.1",
+    "stylelint-config-standard-scss": "^6.1.0",
+    "typescript": "^4.8.4"
   }
 }

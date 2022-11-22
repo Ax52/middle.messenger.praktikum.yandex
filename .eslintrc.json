@@ -1,0 +1,53 @@
+{
+  "env": {
+    "browser": true,
+    "es2022": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 2022,
+    "sourceType": "module"
+  },
+  "extends": [
+    "airbnb-base",
+    "prettier",
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:import/errors",
+    "plugin:import/warnings",
+    "plugin:import/typescript"
+  ],
+  "plugins": ["@typescript-eslint"],
+  "parser": "@typescript-eslint/parser",
+  "rules": {
+    "no-shadow": "off",
+    "no-new": "off",
+    "@typescript-eslint/no-shadow": "error",
+    "class-methods-use-this": "off",
+    "no-underscore-dangle": "off",
+    "no-restricted-exports": "off",
+    "import/prefer-default-export": "off",
+    "no-param-reassign": ["error", { "props": false }],
+    "no-debugger": "warn",
+    "import/extensions": [1, "never"],
+    "quotes": ["error", "double", { "avoidEscape": true }],
+    "no-console": ["warn", { "allow": ["warn", "error"] }],
+    "no-warning-comments": [
+      "warn",
+      {
+        "terms": [
+          "BUG",
+          "HACK",
+          "FIXME",
+          "TODO",
+          "CHECK",
+          "DELETE",
+          "FIX",
+          "FIXIT",
+          "DEL",
+          "REMOVE",
+          "JUNK"
+        ]
+      }
+    ]
+  }
+}
