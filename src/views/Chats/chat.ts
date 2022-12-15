@@ -5,9 +5,13 @@ import Dialog from "./Components/Dialog";
 import EmptyDialog from "./Components/EmptyDialog";
 import Settings from "./Components/Settings";
 
-export function ChatPage(root: HTMLElement) {
-  const location = window.location.pathname.replace("/chat", "");
+enum TView {
+  chat = "chat",
+  nochat = "nochat",
+  settings = "settings",
+}
 
+export function ChatPage(root: HTMLElement, view?: keyof typeof TView) {
   // render
   root.innerHTML = hbs({ css });
 
@@ -19,18 +23,19 @@ export function ChatPage(root: HTMLElement) {
   if (sBarNode instanceof HTMLElement) {
     Sidebar(sBarNode);
   }
-  // render mainscreen
+
+  // render main window
   if (viewNode instanceof HTMLElement) {
-    switch (location) {
-      case "/settings":
+    switch (view) {
+      case "chat":
+        new Dialog(viewNode);
+        break;
+      case "settings":
         Settings(viewNode);
         break;
-      case "/":
-      case "":
-        EmptyDialog(viewNode);
-        break;
+      case "nochat":
       default:
-        new Dialog(viewNode);
+        EmptyDialog(viewNode);
         break;
     }
   }

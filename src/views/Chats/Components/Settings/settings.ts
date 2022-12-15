@@ -1,6 +1,6 @@
 import hbs from "./settings.hbs";
 import css from "./settings.module.scss";
-import { routeTo, validateForm } from "../../../../utils";
+import { Router, validateForm } from "../../../../utils";
 
 export function SettingsPage(root: HTMLElement) {
   // render
@@ -22,14 +22,14 @@ export function SettingsPage(root: HTMLElement) {
   const cancelBtn = document.querySelector("#cancel-btn");
   if (cancelBtn instanceof HTMLElement) {
     cancelBtn.onclick = () => {
-      routeTo("/chat");
+      Router.go("/messenger");
     };
   }
 
   const logoutBtn = document.querySelector("#logout-btn");
   if (logoutBtn instanceof HTMLElement) {
     logoutBtn.onclick = () => {
-      routeTo("/");
+      Router.go("/");
     };
   }
 }

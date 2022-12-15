@@ -1,6 +1,6 @@
 import hbs from "./register.hbs";
 import css from "./register.module.scss";
-import { routeTo, validateForm } from "../../utils";
+import { Router, validateForm } from "../../utils";
 
 export function RegisterPage(root: HTMLElement) {
   // render
@@ -12,7 +12,7 @@ export function RegisterPage(root: HTMLElement) {
     form.onsubmit = async (e) => {
       try {
         await validateForm(e);
-        // routeTo("/");
+        Router.go("/");
       } catch (err: unknown) {
         console.error("Error with register form: ", err);
       }
@@ -22,7 +22,7 @@ export function RegisterPage(root: HTMLElement) {
   const cancelBtn = document.querySelector("#cancel-btn");
   if (cancelBtn instanceof HTMLElement) {
     cancelBtn.onclick = () => {
-      routeTo("/");
+      Router.go("/");
     };
   }
 }

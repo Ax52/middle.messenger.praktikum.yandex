@@ -1,5 +1,5 @@
 import Handlebars from "handlebars";
-import { /* generateId, */ routeTo, validateForm } from "../../../../utils";
+import { /* generateId, */ Router, validateForm } from "../../../../utils";
 import hbs from "./sidebar.hbs";
 import css from "./sidebar.module.scss";
 
@@ -45,7 +45,7 @@ export function Sidebar(root: HTMLElement, selectedChatId?: string) {
   const settingsBtn = document.querySelector("#settings-btn");
   if (settingsBtn instanceof HTMLElement) {
     settingsBtn.onclick = () => {
-      routeTo("/chat/settings");
+      Router.go("/settings");
     };
   }
 
@@ -56,7 +56,7 @@ export function Sidebar(root: HTMLElement, selectedChatId?: string) {
       const { id } = chat.dataset;
       chat.onclick = () => {
         Sidebar(root, id);
-        routeTo(`/chat/${id}`);
+        Router.go("/messenger/dialog");
       };
     });
   }

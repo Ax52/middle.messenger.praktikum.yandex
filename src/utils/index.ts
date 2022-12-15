@@ -10,7 +10,10 @@ export { validateForm } from "./formValidation";
 // <=== TimeUtils ===>
 export { isToday, TFormats, formatTime } from "./TimeUtils";
 
+// <=== Router ===>
+export type { TPathsArr } from "./Router";
+export { Router } from "./Router";
+
 // <=== Misc ===>
 export { generateId } from "./generateId";
-export { routeTo } from "./routingUtils";
 export { Axios } from "./MyAxios";
