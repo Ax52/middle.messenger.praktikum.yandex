@@ -26,7 +26,7 @@ const request = (
 ) =>
   new Promise((res, rej) => {
     const xml = new XMLHttpRequest();
-    xml.open(method as string, url);
+    xml.open(method as string, new URL(url));
     if (headers && headers?.length) {
       headers.forEach(([name, val]) => {
         xml.setRequestHeader(name, val);
@@ -35,7 +35,18 @@ const request = (
     xml.responseType = responseType ?? "text";
     xml.timeout = timeout as number;
     xml.onload = () => {
-      res(xml.response);
+      if (xml.status >= 200 && xml.status <= 299) {
+        res(xml.response);
+      } else if (xml.responseText) {
+        try {
+          const { reason } = JSON.parse(xml.responseText);
+          rej(reason);
+        } catch {
+          rej(xml);
+        }
+      } else {
+        rej(xml);
+      }
     };
     xml.onerror = () => {
       rej(xml);
