@@ -1,11 +1,9 @@
-import { Route } from "./Route";
-
 export type TPathsArr = [string, () => void][];
 
 export class Router {
   // <=== NOTE: Private fields ===>
 
-  static #routes: Route[] = [];
+  static #routes: [string, () => void][] = [];
 
   static #history = window.history;
 
@@ -14,20 +12,21 @@ export class Router {
   }
 
   static #getRoute(path: string) {
-    return this.#routes.find((r) => r.match(path));
+    const route = this.#routes.find(([r]) => r === path);
+    return route?.[1];
   }
 
   static #onRoute(path: string) {
     const route = this.#getRoute(path);
     if (!route) {
       if (this.#page404) {
-        this.#page404.render();
+        this.#page404();
       }
       console.error("Invalid route:\n", path);
       return;
     }
 
-    route.render();
+    route();
   }
 
   // <=== END ===>
@@ -45,8 +44,7 @@ export class Router {
 
   static use(path: string | TPathsArr, component?: () => void) {
     const register = (_path: string, _component: () => void) => {
-      const route = new Route(_path, _component);
-      this.#routes.push(route);
+      this.#routes.push([_path, _component]);
     };
     if (typeof path === "string" && !!component) {
       register(path, component);
@@ -75,7 +73,7 @@ export class Router {
   static showPage500() {
     const page = this.#getRoute("500");
     if (page) {
-      page.render();
+      page();
     }
     console.warn("Server error");
   }
