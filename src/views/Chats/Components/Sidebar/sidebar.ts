@@ -1,5 +1,9 @@
 import Handlebars from "handlebars";
-import { /* generateId, */ Router, validateForm } from "../../../../utils";
+import {
+  /* generateId, */ Router,
+  validateForm,
+  getChatId,
+} from "../../../../utils";
 import hbs from "./sidebar.hbs";
 import css from "./sidebar.module.scss";
 
@@ -33,8 +37,7 @@ const chatsArr = [
 export function Sidebar(root: HTMLElement, selectedChatId?: string) {
   // register helpers
   Handlebars.registerHelper("isChatSelected", (v) => {
-    const pathArr = window.location.pathname.split("/");
-    const chatId = pathArr[1] === "chat" ? pathArr[2] : undefined;
+    const chatId = getChatId();
     return v === chatId || v === selectedChatId;
   });
 
@@ -56,7 +59,7 @@ export function Sidebar(root: HTMLElement, selectedChatId?: string) {
       const { id } = chat.dataset;
       chat.onclick = () => {
         Sidebar(root, id);
-        Router.go("/messenger/dialog");
+        Router.go(`/messenger/dialog#${id}`);
       };
     });
   }

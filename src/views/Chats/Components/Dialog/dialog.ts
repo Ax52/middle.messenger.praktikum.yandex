@@ -6,6 +6,7 @@ import {
   validateForm,
   formatTime,
   TFormats,
+  getChatId,
 } from "../../../../utils";
 
 const username = "Sergio";
@@ -43,10 +44,13 @@ export class Dialog extends Component {
 
   override state: TMessages;
 
+  dialogId: string;
+
   constructor(root: HTMLElement) {
     super(root);
     this.root = root;
     this.state = this.init();
+    this.dialogId = getChatId();
   }
 
   override init() {
