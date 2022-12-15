@@ -21,6 +21,7 @@
   "rules": {
     "no-shadow": "off",
     "no-new": "off",
+    "no-constructor-return": "off",
     "@typescript-eslint/no-shadow": "error",
     "class-methods-use-this": "off",
     "no-underscore-dangle": "off",
