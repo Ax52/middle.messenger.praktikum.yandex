@@ -18,3 +18,4 @@ export { Router } from "./Router";
 export { generateId } from "./generateId";
 export { Axios } from "./MyAxios";
 export { getChatId } from "./getChatId";
+export { Popup } from "./Popup";
