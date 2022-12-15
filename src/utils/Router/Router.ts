@@ -19,9 +19,8 @@ export class Router {
   static #onRoute(path: string) {
     const route = this.#getRoute(path);
     if (!route) {
-      if (this.#page404) {
-        this.#page404();
-      }
+      this.#page404?.();
+
       console.error("Invalid route:\n", path);
       return;
     }
@@ -46,9 +45,13 @@ export class Router {
     const register = (_path: string, _component: () => void) => {
       this.#routes.push([_path, _component]);
     };
+
     if (typeof path === "string" && !!component) {
       register(path, component);
-    } else if (Array.isArray(path)) {
+      return this;
+    }
+
+    if (Array.isArray(path)) {
       path.forEach(([_path, _component]) => {
         register(_path, _component);
       });
@@ -58,8 +61,9 @@ export class Router {
   }
 
   static go(path: string) {
+    const pathWOHash = path.split("#")[0];
     this.#history.pushState({}, "", path);
-    this.#onRoute(path);
+    this.#onRoute(pathWOHash ?? "");
   }
 
   static back() {
@@ -72,9 +76,9 @@ export class Router {
 
   static showPage500() {
     const page = this.#getRoute("500");
-    if (page) {
-      page();
-    }
+
+    page?.();
+
     console.warn("Server error");
   }
 }
