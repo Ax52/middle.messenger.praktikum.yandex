@@ -45,8 +45,6 @@ export function validateForm(event: SubmitEvent) {
         eventBus.on("blur", listen("blur"));
       });
     } else {
-      // NOTE: for task purposes only, added oneliner for console.logging form data
-      console.log(Object.fromEntries([...new FormData(form)])); // FIXIT: delete this line after review
       res();
     }
   });
