@@ -17,3 +17,4 @@ export { Router } from "./Router";
 // <=== Misc ===>
 export { generateId } from "./generateId";
 export { Axios } from "./MyAxios";
+export { getChatId } from "./getChatId";
