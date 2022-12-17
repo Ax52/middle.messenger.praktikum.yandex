@@ -19,3 +19,5 @@ export { generateId } from "./generateId";
 export { Axios } from "./MyAxios";
 export { getChatId } from "./getChatId";
 export { Popup } from "./Popup";
+export { storage } from "./storage";
+export { parse } from "./parser";
