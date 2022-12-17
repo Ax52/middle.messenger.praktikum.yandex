@@ -2,10 +2,11 @@
 
 .popup {
   position: absolute;
-  bottom: 2rem;
+  bottom: 3rem;
   right: 2rem;
   color: global.$paper;
   padding: 1rem;
+  z-index: 100;
 }
 
 .success {
