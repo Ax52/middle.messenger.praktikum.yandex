@@ -1,6 +1,7 @@
 import hbs from "./settings.hbs";
 import css from "./settings.module.scss";
-import { Router, validateForm } from "../../../../utils";
+import { Popup, Router, validateForm } from "../../../../utils";
+import { ChatApi } from "../../../../API";
 
 export function SettingsPage(root: HTMLElement) {
   // render
@@ -28,8 +29,17 @@ export function SettingsPage(root: HTMLElement) {
 
   const logoutBtn = document.querySelector("#logout-btn");
   if (logoutBtn instanceof HTMLElement) {
-    logoutBtn.onclick = () => {
-      Router.go("/");
+    logoutBtn.onclick = async () => {
+      try {
+        await ChatApi.logout();
+        Router.go("/");
+      } catch (err) {
+        if (typeof err === "string") {
+          Popup(root, err, "error");
+        } else {
+          console.error("Logout failed:", err);
+        }
+      }
     };
   }
 }
