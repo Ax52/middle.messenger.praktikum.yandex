@@ -9,14 +9,15 @@ const root = document.querySelector("#root");
 
 if (root instanceof HTMLElement) {
   const routes: TPathsArr = [
-    ["/", () => LoginPage(root)],
-    ["/login", () => LoginPage(root)],
-    ["/sign-up", () => RegisterPage(root)],
-    ["/messenger", () => ChatPage(root, "nochat")],
-    ["/messenger/dialog", () => ChatPage(root, "chat")],
-    ["/settings", () => ChatPage(root, "settings")],
-    ["404", () => Page404(root)],
-    ["500", () => Page500(root)],
+    ["/", () => LoginPage(root), false],
+    ["/login", () => LoginPage(root), false],
+    ["/sign-up", () => RegisterPage(root), false],
+    ["/messenger", () => ChatPage(root, "nochat"), true],
+    ["/messenger/dialog", () => ChatPage(root, "chat"), true],
+    ["/settings", () => ChatPage(root, "settings"), true],
+    ["404", () => Page404(root), false],
+    ["500", () => Page500(root), false],
   ];
   Router.use(routes);
+  Router.start(root);
 }
