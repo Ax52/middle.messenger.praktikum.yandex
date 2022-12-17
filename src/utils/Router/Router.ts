@@ -1,23 +1,29 @@
-export type TPathsArr = [string, () => void][];
+import { ChatApi } from "../../API";
+import { Popup } from "../Popup";
+
+export type TPathsArr = [string, () => void, boolean][];
 
 export class Router {
   // <=== NOTE: Private fields ===>
 
-  static #routes: [string, () => void][] = [];
+  static #routes: TPathsArr = [];
+
+  static #root: HTMLElement;
 
   static #history = window.history;
 
   static get #page404() {
-    return this.#getRoute("404");
+    return this.#getRoute("404").route;
   }
 
   static #getRoute(path: string) {
     const route = this.#routes.find(([r]) => r === path);
-    return route?.[1];
+    return { route: route?.[1], isPrivate: route?.[2] ?? true };
   }
 
-  static #onRoute(path: string) {
-    const route = this.#getRoute(path);
+  static async #onRoute(path: string) {
+    const { route, isPrivate } = this.#getRoute(path);
+
     if (!route) {
       this.#page404?.();
 
@@ -25,12 +31,30 @@ export class Router {
       return;
     }
 
-    route();
+    // NOTE: handle private routes
+    if (!isPrivate) {
+      route();
+    } else {
+      const access = await this.#checkAccess();
+      if (access) {
+        route();
+      } else {
+        this.go("/");
+        Popup(this.#root, "To view this page you need to login first", "warn");
+      }
+    }
+  }
+
+  static async #checkAccess() {
+    const access = await ChatApi.checkAccess();
+    return access;
   }
 
   // <=== END ===>
 
-  static start() {
+  static async start(root: HTMLElement) {
+    this.#root = root;
+
     window.onpopstate = (event: PopStateEvent) => {
       if (event.currentTarget) {
         const target = event.currentTarget as Window;
@@ -41,21 +65,28 @@ export class Router {
     this.#onRoute(window.location.pathname);
   }
 
-  static use(path: string | TPathsArr, component?: () => void) {
-    const register = (_path: string, _component: () => void) => {
-      this.#routes.push([_path, _component]);
+  static use(
+    path: string | TPathsArr,
+    component?: () => void,
+    isPrivate = false,
+  ) {
+    const register = (
+      _path: string,
+      _component: () => void,
+      _isPrivate: boolean,
+    ) => {
+      this.#routes.push([_path, _component, _isPrivate]);
     };
 
     if (typeof path === "string" && !!component) {
-      register(path, component);
+      register(path, component, isPrivate);
       return this;
     }
 
     if (Array.isArray(path)) {
-      path.forEach(([_path, _component]) => {
-        register(_path, _component);
+      path.forEach(([_path, _component, _isPrivate]) => {
+        register(_path, _component, _isPrivate);
       });
-      this.start();
     }
     return this;
   }
@@ -75,7 +106,7 @@ export class Router {
   }
 
   static showPage500() {
-    const page = this.#getRoute("500");
+    const { route: page } = this.#getRoute("500");
 
     page?.();
 
