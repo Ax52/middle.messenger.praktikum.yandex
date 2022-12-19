@@ -13,12 +13,13 @@
       <li class="{{../css.dialog-preview}}">
         <div class="{{../css.item-chat-bar}} item-chat-bar {{#if (isChatSelected id)}}{{../css.selected-chat}}{{/if}}" data-id="{{id}}">
           <div class="{{../css.row-btns}}">
-            <h4>{{username}}</h4>
-            {{#if unread}}
+            <h4>{{title}}</h4>
+            <button id="del-chat" class="{{../css.del-chat}}" data-id="{{id}}">X</button>
+            {{#if (isUnread unread_count)}}
               <div class="{{../css.unread-indicator}}"></div>
             {{/if}}
           </div>
-          <p class="{{../css.preview}}">{{preview}}</p>
+          <p class="{{../css.preview}}">{{last_message.content}}</p>
         </div>
       </li>
     {{/each}}
