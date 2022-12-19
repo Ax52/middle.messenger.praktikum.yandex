@@ -91,7 +91,7 @@ export abstract class Component<TState = unknown> {
     if (newData instanceof Function) {
       Object.assign(this.state ?? {}, newData(this.state));
     } else {
-      Object.assign(this.state ?? {}, newData);
+      this.state = newData;
     }
     this.#eventBus().emit(this.#events.cr);
   }
