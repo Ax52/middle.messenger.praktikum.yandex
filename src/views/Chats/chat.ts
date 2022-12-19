@@ -21,7 +21,7 @@ export function ChatPage(root: HTMLElement, view?: keyof typeof TView) {
 
   // render sidebar
   if (sBarNode instanceof HTMLElement) {
-    Sidebar(sBarNode);
+    new Sidebar(sBarNode);
   }
 
   // render main window

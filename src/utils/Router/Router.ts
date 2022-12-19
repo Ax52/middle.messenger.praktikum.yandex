@@ -40,7 +40,7 @@ export class Router {
         route();
       } else {
         this.go("/");
-        Popup(this.#root, "To view this page you need to login first", "warn");
+        Popup("To view this page you need to login first", "warn");
       }
     }
   }
