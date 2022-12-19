@@ -10,7 +10,7 @@ interface IOptions {
   method?: Methods;
   responseType?: "" | "text" | "json" | "arraybuffer" | "blob" | "document";
   headers?: [string, string][];
-  data?: Document | XMLHttpRequestBodyInit | null | undefined;
+  data?: string | Document | XMLHttpRequestBodyInit | null | undefined;
   // NOTE: JSON.stringify really takes literally anything (any)
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   json?: any;
@@ -24,9 +24,11 @@ const request = (
     method: Methods.get,
   },
 ) =>
-  new Promise((res, rej) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  new Promise<any>((res, rej) => {
     const xml = new XMLHttpRequest();
     xml.open(method as string, new URL(url));
+    xml.withCredentials = true;
     if (headers && headers?.length) {
       headers.forEach(([name, val]) => {
         xml.setRequestHeader(name, val);
@@ -36,7 +38,12 @@ const request = (
     xml.timeout = timeout as number;
     xml.onload = () => {
       if (xml.status >= 200 && xml.status <= 299) {
-        res(xml.response);
+        try {
+          const parsed = JSON.parse(xml.response);
+          res(parsed);
+        } catch {
+          res(xml.response);
+        }
       } else if (xml.responseText) {
         try {
           const { reason } = JSON.parse(xml.responseText);
