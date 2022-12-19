@@ -21,3 +21,4 @@ export { getChatId } from "./getChatId";
 export { Popup } from "./Popup";
 export { storage } from "./storage";
 export { parse } from "./parser";
+export { OpenWS } from "./OpenWS";
