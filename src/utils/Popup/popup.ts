@@ -7,7 +7,6 @@ enum TSeverity {
 }
 
 export function Popup(
-  root: HTMLElement,
   text: string,
   severity: keyof typeof TSeverity = "error",
   duration = 7000,
@@ -15,6 +14,6 @@ export function Popup(
   const popupDiv = document.createElement("div");
   popupDiv.classList.add(css.popup ?? "", css[severity] ?? "");
   popupDiv.textContent = text;
-  root.appendChild(popupDiv);
+  document.body.appendChild(popupDiv);
   setTimeout(() => popupDiv.remove(), duration);
 }
