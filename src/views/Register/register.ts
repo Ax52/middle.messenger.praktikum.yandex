@@ -1,6 +1,7 @@
 import hbs from "./register.hbs";
 import css from "./register.module.scss";
-import { Router, validateForm } from "../../utils";
+import { Router, validateForm, Popup } from "../../utils";
+import { ChatApi } from "../../API";
 
 export function RegisterPage(root: HTMLElement) {
   // render
@@ -11,10 +12,16 @@ export function RegisterPage(root: HTMLElement) {
   if (form instanceof HTMLFormElement) {
     form.onsubmit = async (e) => {
       try {
-        await validateForm(e);
-        Router.go("/");
-      } catch (err: unknown) {
-        console.error("Error with register form: ", err);
+        const formObject = await validateForm(e);
+        const registerResult = await ChatApi.register(formObject);
+        console.log("register: ", registerResult);
+        Router.go("/messages");
+      } catch (err) {
+        const text = "Error with register form: ";
+        console.error(text, err);
+        if (typeof err === "string") {
+          Popup(err ?? text, "error");
+        }
       }
     };
   }

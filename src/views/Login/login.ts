@@ -1,6 +1,7 @@
 import hbs from "./login.hbs";
 import css from "./login.module.scss";
-import { Router, validateForm } from "../../utils";
+import { Router, validateForm, Popup } from "../../utils";
+import { ChatApi } from "../../API";
 
 export function LoginPage(root: HTMLElement) {
   // render
@@ -11,9 +12,13 @@ export function LoginPage(root: HTMLElement) {
   if (form instanceof HTMLFormElement) {
     form.onsubmit = async (e) => {
       try {
-        await validateForm(e);
+        const formData = await validateForm(e);
+        await ChatApi.login(formData);
         Router.go("/messenger");
       } catch (err: unknown) {
+        if (typeof err === "string") {
+          Popup(err, "error");
+        }
         console.error("Error with login form: ", err);
       }
     };
