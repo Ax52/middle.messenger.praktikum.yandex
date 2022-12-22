@@ -87,7 +87,7 @@ export class Dialog extends Component<TState> {
   }
 
   log = (e: Event) => {
-    console.log("[log]: ", e, this);
+    // console.log("[log]: ", e, this);
   };
 
   override init() {

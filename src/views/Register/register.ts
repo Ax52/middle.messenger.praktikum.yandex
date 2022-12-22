@@ -13,8 +13,7 @@ export function RegisterPage(root: HTMLElement) {
     form.onsubmit = async (e) => {
       try {
         const formObject = await validateForm(e);
-        const registerResult = await ChatApi.register(formObject);
-        console.log("register: ", registerResult);
+        await ChatApi.register(formObject);
         Router.go(routes.messenger);
       } catch (err) {
         const text = "Error with register form: ";
