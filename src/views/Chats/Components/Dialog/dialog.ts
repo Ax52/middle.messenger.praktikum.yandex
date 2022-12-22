@@ -43,7 +43,6 @@ export class Dialog extends Component<TState> {
     super(root);
     this.root = root;
     this.dialogId = getChatId();
-    console.log(`messages_${this.dialogId}`);
     this.state = {
       title: "",
       messages: storage.get(`messages_${this.dialogId}`) ?? [],
