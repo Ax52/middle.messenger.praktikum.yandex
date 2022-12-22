@@ -1,6 +1,15 @@
 import { Axios } from "../utils";
 import { config } from "../../config";
 
+export type TUser = {
+  first_name: string;
+  second_name: string;
+  display_name: string;
+  login: string;
+  email: string;
+  phone: string;
+};
+
 export class ChatApi {
   static async login(loginData: Record<string, FormDataEntryValue>) {
     return Axios.json(config.chats.signin, loginData);
@@ -69,5 +78,21 @@ export class ChatApi {
       JSON.stringify({ oldPassword, newPassword }),
       { headers: [["Content-Type", "application/json"]] },
     );
+  }
+
+  static async changeUserProfile(userData: TUser) {
+    return Axios.put(config.chats.changeUserProfile, JSON.stringify(userData), {
+      headers: [["Content-Type", "application/json"]],
+    });
+  }
+
+  static async setAvatar(avatar: FormData) {
+    return Axios.put(config.chats.setAvatar, avatar, {
+      headers: [["accept", "application/json"]],
+    });
+  }
+
+  static getAvatarUrl(url: string) {
+    return config.chats.getAvatar(url);
   }
 }
