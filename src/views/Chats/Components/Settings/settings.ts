@@ -1,6 +1,7 @@
 import hbs from "./settings.hbs";
 import css from "./settings.module.scss";
-import { Popup, Router, validateForm } from "../../../../utils";
+import { Popup, Router, routes } from "../../../../utils";
+import { FormHandler } from "./utils";
 import { ChatApi } from "../../../../API";
 
 export function SettingsPage(root: HTMLElement) {
@@ -10,20 +11,13 @@ export function SettingsPage(root: HTMLElement) {
   // event listeners
   const form = document.querySelector("#form-settings");
   if (form instanceof HTMLFormElement) {
-    form.onsubmit = async (e) => {
-      try {
-        await validateForm(e);
-        // saveNewSettings();
-      } catch (err: unknown) {
-        console.error("Error with settings form: ", err);
-      }
-    };
+    new FormHandler(form, css);
   }
 
   const cancelBtn = document.querySelector("#cancel-btn");
   if (cancelBtn instanceof HTMLElement) {
     cancelBtn.onclick = () => {
-      Router.go("/messenger");
+      Router.go(routes.messenger);
     };
   }
 
@@ -32,10 +26,10 @@ export function SettingsPage(root: HTMLElement) {
     logoutBtn.onclick = async () => {
       try {
         await ChatApi.logout();
-        Router.go("/");
+        Router.go(routes.loginShort);
       } catch (err) {
         if (typeof err === "string") {
-          Popup(root, err, "error");
+          Popup(err, "error");
         } else {
           console.error("Logout failed:", err);
         }
