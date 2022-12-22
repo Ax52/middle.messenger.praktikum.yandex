@@ -29,10 +29,7 @@ type TWSMessage = {
 };
 
 export class Dialog extends Component<TState> {
-  override state: TState = {
-    title: "",
-    messages: storage.get("messages") ?? [],
-  };
+  override state: TState;
 
   root: HTMLElement;
 
@@ -46,6 +43,11 @@ export class Dialog extends Component<TState> {
     super(root);
     this.root = root;
     this.dialogId = getChatId();
+    console.log(`messages_${this.dialogId}`);
+    this.state = {
+      title: "",
+      messages: storage.get(`messages_${this.dialogId}`) ?? [],
+    };
 
     this.#initDialog();
     this.init();
@@ -106,7 +108,7 @@ export class Dialog extends Component<TState> {
         ...prev,
         messages: prev?.messages ? [...prev.messages, newRecord] : [newRecord],
       }));
-      storage.update("messages", [newRecord]);
+      storage.update(`messages_${this.dialogId}`, [newRecord]);
     }
   };
 
