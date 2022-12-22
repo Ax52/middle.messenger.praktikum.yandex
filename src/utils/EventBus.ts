@@ -1,4 +1,5 @@
-type TCallback = <T>(args?: T) => void;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type TCallback = <T>(args?: T | any) => void;
 
 export class EventBus {
   listeners: { [key: string]: TCallback[] };
