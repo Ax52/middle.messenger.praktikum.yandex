@@ -7,6 +7,7 @@ import {
   Component,
   Popup,
   storage,
+  routes,
 } from "../../../../utils";
 import hbs from "./sidebar.hbs";
 import css from "./sidebar.module.scss";
@@ -39,7 +40,7 @@ export class Sidebar extends Component<IMessage[]> {
         {
           event: "click",
           targetId: "#settings-btn",
-          callback: () => Router.go("/settings"),
+          callback: () => Router.go(routes.settings),
         },
         {
           event: "click",
@@ -106,7 +107,7 @@ export class Sidebar extends Component<IMessage[]> {
       try {
         const { id: chatId } = await ChatApi.createChat(chatTitle);
         await this.refreshChats();
-        Router.go(`/messenger/dialog#${chatId}`);
+        Router.go(`${routes.dialog}#${chatId}`);
       } catch (err) {
         console.error("failed to create new dialog: ", err);
       }
@@ -115,7 +116,7 @@ export class Sidebar extends Component<IMessage[]> {
 
   chooseChat(e: Event) {
     const { id } = (e.target as HTMLElement).dataset;
-    Router.go(`/messenger/dialog#${id}`);
+    Router.go(`${routes.dialog}#${id}`);
   }
 
   async deleteChat(e: Event) {

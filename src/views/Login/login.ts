@@ -1,6 +1,6 @@
 import hbs from "./login.hbs";
 import css from "./login.module.scss";
-import { Router, validateForm, Popup } from "../../utils";
+import { Router, validateForm, Popup, routes } from "../../utils";
 import { ChatApi } from "../../API";
 
 export function LoginPage(root: HTMLElement) {
@@ -14,7 +14,7 @@ export function LoginPage(root: HTMLElement) {
       try {
         const formData = await validateForm(e);
         await ChatApi.login(formData);
-        Router.go("/messenger");
+        Router.go(routes.messenger);
       } catch (err: unknown) {
         if (typeof err === "string") {
           Popup(err, "error");
@@ -27,7 +27,7 @@ export function LoginPage(root: HTMLElement) {
   const signUpBtn = document.querySelector("#sign-up-btn");
   if (signUpBtn instanceof HTMLElement) {
     signUpBtn.onclick = () => {
-      Router.go("/sign-up");
+      Router.go(routes.register);
     };
   }
 }

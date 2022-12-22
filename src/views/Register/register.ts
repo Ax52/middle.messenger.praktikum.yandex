@@ -1,6 +1,6 @@
 import hbs from "./register.hbs";
 import css from "./register.module.scss";
-import { Router, validateForm, Popup } from "../../utils";
+import { Router, validateForm, Popup, routes } from "../../utils";
 import { ChatApi } from "../../API";
 
 export function RegisterPage(root: HTMLElement) {
@@ -15,7 +15,7 @@ export function RegisterPage(root: HTMLElement) {
         const formObject = await validateForm(e);
         const registerResult = await ChatApi.register(formObject);
         console.log("register: ", registerResult);
-        Router.go("/messages");
+        Router.go(routes.messenger);
       } catch (err) {
         const text = "Error with register form: ";
         console.error(text, err);
@@ -29,7 +29,7 @@ export function RegisterPage(root: HTMLElement) {
   const cancelBtn = document.querySelector("#cancel-btn");
   if (cancelBtn instanceof HTMLElement) {
     cancelBtn.onclick = () => {
-      Router.go("/");
+      Router.go(routes.loginShort);
     };
   }
 }
