@@ -12,7 +12,7 @@ export { isToday, TFormats, formatTime } from "./TimeUtils";
 
 // <=== Router ===>
 export type { TPathsArr } from "./Router";
-export { Router } from "./Router";
+export { Router, routes } from "./Router";
 
 // <=== Misc ===>
 export { generateId } from "./generateId";
