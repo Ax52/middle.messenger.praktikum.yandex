@@ -7,6 +7,13 @@ export function LoginPage(root: HTMLElement) {
   // render
   root.innerHTML = hbs({ css });
 
+  // NOTE: check if user is already login and redirect if true
+  ChatApi.checkAccess().then((access) => {
+    if (access) {
+      Router.go(routes.messenger);
+    }
+  });
+
   // event listeners
   const form = document.querySelector("#form-login");
   if (form instanceof HTMLFormElement) {
