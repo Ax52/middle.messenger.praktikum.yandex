@@ -9,7 +9,8 @@
     "start": "npm run build && node server.js",
     "serve": "webpack serve",
     "lint": "echo 'Eslint check' && eslint '**/*.ts' && echo 'TypeScript check' && tsc --noEmit && echo 'StyleLint check' && stylelint '**/*.scss'",
-    "build": "parcel build index.html && rm -rf .parcel-cache"
+    "build": "parcel build index.html && rm -rf .parcel-cache",
+    "prepare": "husky install"
   },
   "dependencies": {
     "express": "4.18.2",
@@ -26,6 +27,7 @@
     "eslint-plugin-import": "2.26.0",
     "handlebars-loader": "1.7.3",
     "html-webpack-plugin": "5.5.0",
+    "husky": "^8.0.0",
     "mini-css-extract-plugin": "2.7.2",
     "mocha": "10.2.0",
     "postcss": "8.4.20",
