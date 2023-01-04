@@ -8,8 +8,6 @@ export class Router {
 
   static #routes: TPathsArr = [];
 
-  static #root: HTMLElement;
-
   static #history = window.history;
 
   static get #page404() {
@@ -52,9 +50,7 @@ export class Router {
 
   // <=== END ===>
 
-  static async start(root: HTMLElement) {
-    this.#root = root;
-
+  static async start() {
     window.onpopstate = (event: PopStateEvent) => {
       if (event.currentTarget) {
         const target = event.currentTarget as Window;

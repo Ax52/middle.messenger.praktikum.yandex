@@ -22,5 +22,5 @@ if (root instanceof HTMLElement) {
     [_500, () => Page500(root), false],
   ];
   Router.use(routesWPages);
-  Router.start(root);
+  Router.start();
 }
