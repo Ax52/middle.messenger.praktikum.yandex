@@ -35,8 +35,12 @@ module.exports = {
       },
       {
         test: /\.hbs/,
-        loader: "handlebars-template-loader",
-        exclude: /(node_modules)/,
+        loader: "handlebars-loader",
+        options: {
+          precompileOptions: {
+            knownHelpersOnly: false,
+          },
+        },
       },
       {
         test: /\.s[ac]ss$/i,
