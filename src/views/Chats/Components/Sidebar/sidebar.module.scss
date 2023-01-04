@@ -20,6 +20,10 @@
   justify-content: space-between;
 }
 
+.row-btns {
+  width: fit-content;
+}
+
 .primary-bar {
   @extend %bar;
   @include global.cloudy-glass;
@@ -31,6 +35,7 @@
   & .row-btns {
     display: flex;
     justify-content: space-between;
+    width: auto;
 
     & > button {
       @include global.btn-text;
@@ -44,6 +49,16 @@
   width: 100%;
 }
 
+.del-chat {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  border: none;
+  background-color: transparent;
+  visibility: hidden;
+  cursor: pointer;
+}
+
 %item-chat-bar {
   @extend %bar;
 
@@ -52,13 +67,17 @@
 
   & .unread-indicator {
     position: absolute;
-    top: 10px;
+    bottom: 10px;
     right: 10px;
     border-radius: 50%;
     width: 10px;
     height: 10px;
     background-color: global.$red;
   }
+}
+
+.dialog-preview:hover .del-chat {
+  visibility: visible;
 }
 
 .item-chat-bar {
@@ -72,6 +91,7 @@
 }
 
 .preview {
+  width: fit-content;
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;

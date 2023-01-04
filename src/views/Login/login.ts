@@ -1,28 +1,17 @@
 import hbs from "./login.hbs";
 import css from "./login.module.scss";
-import { routeTo, validateForm } from "../../utils";
-
-import { Button } from "../../Components";
+import { Router, validateForm, Popup, routes } from "../../utils";
+import { ChatApi } from "../../API";
 
 export function LoginPage(root: HTMLElement) {
-  const test = new Button(root, {
-    text: "Go to chat",
-    id: "simeBtn23",
-    clx: [css["outlined-btn"]],
-    listeners: [
-      {
-        event: "click",
-        callback: () => {
-          routeTo("/chat");
-        },
-      },
-    ],
-  });
-
   // render
-  root.innerHTML = hbs({
-    css,
-    test: test.render(),
+  root.innerHTML = hbs({ css });
+
+  // NOTE: check if user is already login and redirect if true
+  ChatApi.checkAccess().then((access) => {
+    if (access) {
+      Router.go(routes.messenger);
+    }
   });
 
   // event listeners
@@ -30,9 +19,13 @@ export function LoginPage(root: HTMLElement) {
   if (form instanceof HTMLFormElement) {
     form.onsubmit = async (e) => {
       try {
-        await validateForm(e);
-        // routeTo("/chat");
+        const formData = await validateForm(e);
+        await ChatApi.login(formData);
+        Router.go(routes.messenger);
       } catch (err: unknown) {
+        if (typeof err === "string") {
+          Popup(err, "error");
+        }
         console.error("Error with login form: ", err);
       }
     };
@@ -41,7 +34,7 @@ export function LoginPage(root: HTMLElement) {
   const signUpBtn = document.querySelector("#sign-up-btn");
   if (signUpBtn instanceof HTMLElement) {
     signUpBtn.onclick = () => {
-      routeTo("/register");
+      Router.go(routes.register);
     };
   }
 }

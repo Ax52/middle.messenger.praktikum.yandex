@@ -27,6 +27,7 @@
     "importsNotUsedAsValues": "error",
     "noFallthroughCasesInSwitch": true,
     "allowSyntheticDefaultImports": true,
+    "strictPropertyInitialization": false,
     "forceConsistentCasingInFileNames": true
   }
 }

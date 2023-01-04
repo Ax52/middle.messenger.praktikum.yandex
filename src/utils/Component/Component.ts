@@ -41,7 +41,6 @@ export abstract class Component<TState = unknown> {
   }
 
   #init() {
-    this.init();
     this.#eventBus().emit(this.#events.cr);
     const eventsArr: TEvent[] | undefined =
       (this.#props?.listeners as TEvent[]) ??
@@ -54,8 +53,12 @@ export abstract class Component<TState = unknown> {
     eventsArr.forEach(({ event, targetId, callback }) => {
       const cb = <T>(e: T) => {
         const ev = e as SubmitEvent;
-        if (ev?.target === document.querySelector(targetId)) {
-          callback(ev);
+        const elements = document.querySelectorAll(targetId);
+        // eslint-disable-next-line no-restricted-syntax
+        for (const element of elements) {
+          if (ev?.target === element) {
+            callback(ev);
+          }
         }
       };
       this.#eventBus().on(event, cb);
@@ -88,7 +91,7 @@ export abstract class Component<TState = unknown> {
     if (newData instanceof Function) {
       Object.assign(this.state ?? {}, newData(this.state));
     } else {
-      Object.assign(this.state ?? {}, newData);
+      this.state = newData;
     }
     this.#eventBus().emit(this.#events.cr);
   }

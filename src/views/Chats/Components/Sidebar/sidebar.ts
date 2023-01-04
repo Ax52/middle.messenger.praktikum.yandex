@@ -1,76 +1,137 @@
 import Handlebars from "handlebars";
-import { /* generateId, */ routeTo, validateForm } from "../../../../utils";
+import { ChatApi } from "../../../../API";
+import {
+  Router,
+  validateForm,
+  getChatId,
+  Component,
+  Popup,
+  storage,
+  routes,
+} from "../../../../utils";
 import hbs from "./sidebar.hbs";
 import css from "./sidebar.module.scss";
 
-const chatsArr = [
-  {
-    // id: generateId(),
-    id: "11961667656899418",
-    username: "Sergio",
-    preview:
-      "Hi! Did you saw new movie? It's really interesting movie about dolphins with...",
-    unread: true,
-  },
-  {
-    // id: generateId(),
-    id: "34751667656875167",
-    username: "Hannah",
-    preview:
-      "Hi! Did you saw new movie? It's really interesting movie about dolphins with...",
-    unread: true,
-  },
-  {
-    // id: generateId(),
-    id: "89491667656899418",
-    username: "Eric",
-    preview:
-      "Hi! Did you saw new movie? It's really interesting movie about dolphins with...",
-    unread: false,
-  },
-];
+interface IMessage {
+  avatar: null | string;
+  created_by: number;
+  id: number;
+  last_message: null | string;
+  title: string;
+  unread_count: number;
+}
 
-export function Sidebar(root: HTMLElement, selectedChatId?: string) {
-  // register helpers
-  Handlebars.registerHelper("isChatSelected", (v) => {
-    const pathArr = window.location.pathname.split("/");
-    const chatId = pathArr[1] === "chat" ? pathArr[2] : undefined;
-    return v === chatId || v === selectedChatId;
-  });
+export class Sidebar extends Component<IMessage[]> {
+  root: HTMLElement;
 
-  // render
-  root.innerHTML = hbs({ css, chatsArr });
-
-  // event listeners
-  const settingsBtn = document.querySelector("#settings-btn");
-  if (settingsBtn instanceof HTMLElement) {
-    settingsBtn.onclick = () => {
-      routeTo("/chat/settings");
-    };
-  }
-
-  const chats: NodeListOf<HTMLElement> =
-    document.querySelectorAll(".item-chat-bar");
-  if (chats) {
-    chats.forEach((chat) => {
-      const { id } = chat.dataset;
-      chat.onclick = () => {
-        Sidebar(root, id);
-        routeTo(`/chat/${id}`);
-      };
+  constructor(root: HTMLElement) {
+    super(root, {
+      listeners: [
+        {
+          event: "submit",
+          targetId: "#search-dialog",
+          callback: (e: SubmitEvent) => this.handleSearch(e),
+        },
+        {
+          event: "click",
+          targetId: "#new-dialog",
+          callback: () => this.createNewDialog(),
+        },
+        {
+          event: "click",
+          targetId: "#settings-btn",
+          callback: () => Router.go(routes.settings),
+        },
+        {
+          event: "click",
+          targetId: ".item-chat-bar",
+          callback: (e: Event) => this.chooseChat(e),
+        },
+        {
+          event: "click",
+          targetId: "#del-chat",
+          callback: (e: Event) => this.deleteChat(e),
+        },
+      ],
     });
+    this.root = root;
   }
 
-  // event listeners
-  const searchForm = document.querySelector("#search-dialog");
-  if (searchForm instanceof HTMLFormElement) {
-    searchForm.onsubmit = async (e) => {
-      try {
-        await validateForm(e);
-        // filterDialogs();
-      } catch (err: unknown) {
-        console.error("Error with search form: ", err);
+  override init() {
+    // register helpers
+    Handlebars.registerHelper("isChatSelected", (v?: number | string) => {
+      const chatId = getChatId();
+      if (typeof v === "number") {
+        return v.toString() === chatId;
       }
-    };
+      if (typeof v === "string") {
+        return v === chatId;
+      }
+      return false;
+    });
+    Handlebars.registerHelper("isUnread", (v) => v > 0);
+    this.refreshChats();
+
+    return storage.get("chats") ?? [];
+  }
+
+  async refreshChats() {
+    try {
+      const list = (await ChatApi.getChats()) as IMessage[];
+      this.setState(list);
+      storage.save("chats", list);
+    } catch (err) {
+      if (typeof err === "string") {
+        Popup(err, "warn");
+      } else if (err instanceof Error) {
+        Popup(err.message, "warn");
+      } else {
+        console.error("Failed to refresh chats: ", err);
+      }
+    }
+  }
+
+  async handleSearch(e: SubmitEvent) {
+    try {
+      await validateForm(e);
+      // filterDialogs();
+    } catch (err: unknown) {
+      console.error("Error with search form: ", err);
+    }
+  }
+
+  async createNewDialog() {
+    // eslint-disable-next-line no-alert
+    const chatTitle = prompt("Enter chat title");
+    if (chatTitle) {
+      try {
+        const { id: chatId } = await ChatApi.createChat(chatTitle);
+        await this.refreshChats();
+        Router.go(`${routes.dialog}#${chatId}`);
+      } catch (err) {
+        console.error("failed to create new dialog: ", err);
+      }
+    }
+  }
+
+  chooseChat(e: Event) {
+    const { id } = (e.target as HTMLElement).dataset;
+    Router.go(`${routes.dialog}#${id}`);
+  }
+
+  async deleteChat(e: Event) {
+    const agreed = window.confirm("Are you sure?");
+    const { id } = (e.target as HTMLElement).dataset;
+    if (!agreed || !id) return;
+    try {
+      await ChatApi.deleteChat(+id);
+      this.refreshChats();
+    } catch (err) {
+      console.error("Failed to delete dialog: ", err);
+    }
+  }
+
+  override render() {
+    return hbs({ css, chatsArr: this.state ?? "" });
   }
 }

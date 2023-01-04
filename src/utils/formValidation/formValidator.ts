@@ -1,14 +1,15 @@
-enum FieldTypes {
-  first_name = "first_name",
-  second_name = "second_name",
-  login = "login",
-  email = "email",
-  password = "password",
-  phone = "phone",
-  message = "message",
-}
+const FieldTypes = {
+  first_name: "first_name",
+  second_name: "second_name",
+  login: "login",
+  email: "email",
+  password: "password",
+  newPassword: "new_password",
+  phone: "phone",
+  message: "message",
+} as const;
 
-export type TFormData = [keyof typeof FieldTypes, string];
+export type TFormData = [typeof FieldTypes[keyof typeof FieldTypes], string];
 
 function isOk([type, value]: TFormData) {
   let reg: RegExp;
@@ -27,6 +28,9 @@ function isOk([type, value]: TFormData) {
       break;
     case FieldTypes.password:
       reg = /^(?=.*?([A-Z]))(?=.*?\d)(\w|-|_){8,40}$/;
+      break;
+    case FieldTypes.newPassword:
+      reg = /^((?=.*?([A-Z]))(?=.*?\d)(\w|-|_){8,40}|\w{0,0})$/;
       break;
     case FieldTypes.phone:
       reg = /^\+?\d{10,15}$/;

@@ -6,51 +6,56 @@
     <form id="form-settings">
       <div class="{{css.inputs}}">
         <div class="{{css.avatar}}">
-          <div class="{{css.no-avatar}}">
-            <input class="{{css.input-avatar}}" type="file" name="avatar" />
-          </div>
+          <button class="{{css.no-avatar}}" id="set_avatar" type="button">
+            <input
+              class="{{css.input-avatar}}"
+              type="file"
+              name="avatar"
+              accept="image/*"
+            />
+          </button>
         </div>
         <label for="first_name">
-          <input name="first_name" id="first_name" />
+          <input name="first_name" id="first_name" disabled="true" />
           First Name
         </label>
         <label for="second_name">
-          <input name="second_name" id="second_name" />
+          <input name="second_name" id="second_name" disabled="true" />
           Second Name
         </label>
-
+        <label for="user_id">
+          <input name="user_id" id="user_id" disabled="true" />
+          User Id
+        </label>
         <label for="login">
-          <input name="login" id="login" />
+          <input name="login" id="login" disabled="true" />
           Login
         </label>
         <label for="email">
-          <input name="email" id="email" />
+          <input name="email" id="email" disabled="true" />
           Email
         </label>
-        {{#if passwordCorrect}}
-          <label for="new-password">
-            <input
-              name="new-password"
-              id="new-password"
-              autocomplete="off"
-              type="password"
-            />
-            New Password
-          </label>
-        {{else}}
-          <label for="old-password">
-            <input
-              name="old-password"
-              id="old-password"
-              placeholder="Enter your old password to reset"
-              autocomplete="off"
-              type="password"
-            />
-            Old Password
-          </label>
-        {{/if}}
+        <label for="old_password">
+          <input
+            name="old_password"
+            id="old-password"
+            placeholder="Enter your old password to reset"
+            autocomplete="off"
+            type="password"
+          />
+          Old Password
+        </label>
+        <label for="new_password">
+          <input
+            name="new_password"
+            id="new-password"
+            autocomplete="off"
+            type="password"
+          />
+          New Password
+        </label>
         <label for="phone">
-          <input name="phone" id="phone" />
+          <input name="phone" id="phone" disabled="true" />
           Phone
         </label>
       </div>
@@ -59,7 +64,7 @@
           Cancel
         </button>
         <button id="save-btn" class="{{css.contained-btn}}" type="submit">
-          Save
+          Edit
         </button>
       </div>
       <div class="{{css.logout}}">

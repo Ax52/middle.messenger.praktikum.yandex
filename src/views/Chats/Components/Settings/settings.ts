@@ -1,6 +1,8 @@
 import hbs from "./settings.hbs";
 import css from "./settings.module.scss";
-import { routeTo, validateForm } from "../../../../utils";
+import { Popup, Router, routes } from "../../../../utils";
+import { FormHandler } from "./utils";
+import { ChatApi } from "../../../../API";
 
 export function SettingsPage(root: HTMLElement) {
   // render
@@ -9,27 +11,29 @@ export function SettingsPage(root: HTMLElement) {
   // event listeners
   const form = document.querySelector("#form-settings");
   if (form instanceof HTMLFormElement) {
-    form.onsubmit = async (e) => {
-      try {
-        await validateForm(e);
-        // saveNewSettings();
-      } catch (err: unknown) {
-        console.error("Error with settings form: ", err);
-      }
-    };
+    new FormHandler(form, css);
   }
 
   const cancelBtn = document.querySelector("#cancel-btn");
   if (cancelBtn instanceof HTMLElement) {
     cancelBtn.onclick = () => {
-      routeTo("/chat");
+      Router.go(routes.messenger);
     };
   }
 
   const logoutBtn = document.querySelector("#logout-btn");
   if (logoutBtn instanceof HTMLElement) {
-    logoutBtn.onclick = () => {
-      routeTo("/");
+    logoutBtn.onclick = async () => {
+      try {
+        await ChatApi.logout();
+        Router.go(routes.loginShort);
+      } catch (err) {
+        if (typeof err === "string") {
+          Popup(err, "error");
+        } else {
+          console.error("Logout failed:", err);
+        }
+      }
     };
   }
 }

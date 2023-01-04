@@ -16,6 +16,22 @@
   height: 80px;
   border-bottom: 1px solid global.$dark-grey;
   z-index: 10;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.controls {
+  display: flex;
+  gap: 1rem;
+}
+
+.add-user {
+  @include global.btn-contained(global.$blue);
+}
+
+.del-user {
+  @include global.btn-outlined(global.$red);
 }
 
 .feed-wrapper {

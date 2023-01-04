@@ -2,12 +2,14 @@ import { formValidatior, TFormData } from "./formValidator";
 import { EventBus } from "../EventBus";
 import css from "../utils.module.scss";
 
-export function validateForm(event: SubmitEvent) {
+export function validateForm(
+  event: SubmitEvent,
+): Promise<Record<string, FormDataEntryValue>> {
   event.preventDefault();
 
   const form = event.target as HTMLFormElement;
 
-  return new Promise<void>((res, rej) => {
+  return new Promise((res, rej) => {
     if (!form) {
       rej();
     }
@@ -45,9 +47,10 @@ export function validateForm(event: SubmitEvent) {
         eventBus.on("blur", listen("blur"));
       });
     } else {
-      // NOTE: for task purposes only, added oneliner for console.logging form data
-      console.log(Object.fromEntries([...new FormData(form)])); // FIXIT: delete this line after review
-      res();
+      const formObject = [...new FormData(form)].reduce<
+        Record<string, FormDataEntryValue>
+      >((a, [key, val]) => ({ ...a, [key]: val }), {});
+      res(formObject);
     }
   });
 }

@@ -8,6 +8,8 @@ As for now, it doesn't ready for use, but under active development.
 
 As for sprint_2 it now recieves some reactivity and got preparations for future releases.
 
+As for sprint_3 it now it recieves API, wss connection, SPA routing and got preparations for future releases.
+
 ## Overview
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/fad0dcbe-e71d-40a0-93a1-a0ef369a2684/deploy-status)](https://app.netlify.com/sites/tangerine-starlight-1349d8/deploys)

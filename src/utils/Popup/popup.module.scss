@@ -1,0 +1,22 @@
+@use "~/src/index.scss" as global;
+
+.popup {
+  position: absolute;
+  bottom: 3rem;
+  right: 2rem;
+  color: global.$paper;
+  padding: 1rem;
+  z-index: 100;
+}
+
+.success {
+  background-color: global.$success;
+}
+
+.warn {
+  background-color: global.$warning;
+}
+
+.error {
+  background-color: global.$error;
+}

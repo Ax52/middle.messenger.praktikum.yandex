@@ -22,6 +22,12 @@
 
 .input-avatar {
   visibility: hidden;
+  position: absolute;
+}
+
+.avatar-img {
+  width: 50px;
+  aspect-ratio: 1;
 }
 
 .inputs {
@@ -69,6 +75,7 @@
     height: 50px;
     background-color: global.$base-grey;
     position: relative;
+    border: none;
 
     &::before {
       content: "Avatar";
@@ -77,6 +84,10 @@
       top: 50%;
       left: 50%;
       translate: -50% -50%;
+    }
+
+    &:has(.avatar-img)::before {
+      top: -20%;
     }
   }
 }
