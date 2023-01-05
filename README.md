@@ -4,11 +4,14 @@ This is messenger app, created under the review of Yandex Practicum members team
 
 This messenger allows users to chat with each other fast and smoothly.
 
-As for now, it doesn't ready for use, but under active development.
+As for now, its ready to use.
 
 As for sprint_2 it now recieves some reactivity and got preparations for future releases.
 
 As for sprint_3 it now it recieves API, wss connection, SPA routing and got preparations for future releases.
+
+As for sprimt_4 it now recieves tests, builds with webpack instead of parcel, recieves Dockerfile, precommit hook (via Husky),
+auditted packages (on the moment of release).
 
 ## Overview
 
