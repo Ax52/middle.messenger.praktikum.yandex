@@ -3,15 +3,13 @@ const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
-const isDev = process.env.NODE_ENV === "development";
-
 module.exports = {
   mode: "development",
   entry: "./src/index.ts",
   devtool: "inline-source-map",
   output: {
     path: path.resolve(__dirname, "./dist"),
-    filename: isDev ? "[name].[contenthash].js" : "[name].js",
+    filename: "[name].[contenthash].js",
   },
   resolve: {
     extensions: [".tsx", ".ts", ".js", ".json"],
@@ -74,7 +72,7 @@ module.exports = {
       template: "./index.html",
     }),
     new MiniCssExtractPlugin({
-      filename: isDev ? "[name].[contenthash].less" : "[name].less",
+      filename: "[name].[contenthash].less",
     }),
   ],
 };
