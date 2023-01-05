@@ -9,7 +9,7 @@
     "start": "npm run build && node server.js",
     "serve": "webpack serve",
     "lint": "echo 'Eslint check' && eslint '**/*.ts' && echo 'TypeScript check' && tsc --noEmit && echo 'StyleLint check' && stylelint '**/*.scss'",
-    "build": "parcel build index.html && rm -rf .parcel-cache",
+    "build": "webpack build",
     "prepare": "husky install"
   },
   "dependencies": {
