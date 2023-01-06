@@ -1,7 +1,9 @@
 import { Axios } from "./MyAxios";
 
+const baseUrl = "https://jsonplaceholder.typicode.com";
+
 test("Should get method works", async () => {
-  const fakeUrl = "https://jsonplaceholder.typicode.com/todos/1";
+  const fakeUrl = `${baseUrl}/todos/1`;
   const res = await Axios.get(fakeUrl);
   const response = {
     userId: 1,
@@ -13,7 +15,7 @@ test("Should get method works", async () => {
 });
 
 test("Should post method works", async () => {
-  const fakeUrl = "https://jsonplaceholder.typicode.com/posts";
+  const fakeUrl = `${baseUrl}/posts`;
   const fakePost = JSON.stringify({
     title: "foo",
     body: "bar",
@@ -33,7 +35,7 @@ test("Should post method works", async () => {
 });
 
 test("Should delete method works", async () => {
-  const fakeUrl = "https://jsonplaceholder.typicode.com/posts/1";
+  const fakeUrl = `${baseUrl}/posts/1`;
   const res = await Axios.delete(fakeUrl);
   const response = {};
   expect(res).toMatchObject(response);

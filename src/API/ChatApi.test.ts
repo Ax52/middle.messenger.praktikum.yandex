@@ -2,13 +2,15 @@
 
 import { ChatApi } from "./ChatApi";
 
+const ATTEMPTS = 3;
+
 test("Should check login user", async () => {
   const res = await ChatApi.checkAccess();
   expect(res).toBe(false);
 });
 
 test("Should register user", async () => {
-  let attempts = 3;
+  let attempts = ATTEMPTS;
   let res: any;
   async function attempt() {
     try {
