@@ -14,6 +14,16 @@ export function SettingsPage(root: HTMLElement) {
     new FormHandler(form, css);
   }
 
+  const disabledNodes = document.querySelectorAll(
+    "#form-settings label:has(input:disabled)",
+  );
+  // eslint-disable-next-line no-restricted-syntax
+  for (const node of disabledNodes) {
+    node.addEventListener("click", () => {
+      Popup("To edit this line you should unlock profile first", "warn");
+    });
+  }
+
   const cancelBtn = document.querySelector("#cancel-btn");
   if (cancelBtn instanceof HTMLElement) {
     cancelBtn.onclick = () => {
