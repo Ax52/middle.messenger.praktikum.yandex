@@ -1,4 +1,3 @@
-import Handlebars from "handlebars";
 import hbs from "./dialog.hbs";
 import css from "./dialog.module.scss";
 import {
@@ -90,11 +89,6 @@ export class Dialog extends Component<TState> {
   log = (e: Event) => {
     console.warn("[log]: ", e, this);
   };
-
-  override init() {
-    // register helpers
-    Handlebars.registerHelper("isYourMessage", (v) => v !== "you");
-  }
 
   updateMessages = ({ content, type, time, user_id: id }: TWSMessage) => {
     if (type === "message") {

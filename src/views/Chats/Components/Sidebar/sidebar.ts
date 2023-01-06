@@ -1,9 +1,7 @@
-import Handlebars from "handlebars";
 import { ChatApi } from "../../../../API";
 import {
   Router,
   validateForm,
-  getChatId,
   Component,
   Popup,
   storage,
@@ -58,18 +56,6 @@ export class Sidebar extends Component<IMessage[]> {
   }
 
   override init() {
-    // register helpers
-    Handlebars.registerHelper("isChatSelected", (v?: number | string) => {
-      const chatId = getChatId();
-      if (typeof v === "number") {
-        return v.toString() === chatId;
-      }
-      if (typeof v === "string") {
-        return v === chatId;
-      }
-      return false;
-    });
-    Handlebars.registerHelper("isUnread", (v) => v > 0);
     this.refreshChats();
 
     return storage.get("chats") ?? [];

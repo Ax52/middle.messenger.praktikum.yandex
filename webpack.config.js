@@ -35,6 +35,7 @@ module.exports = {
         test: /\.hbs/,
         loader: "handlebars-loader",
         options: {
+          runtime: path.resolve(__dirname, "./src/utils/hbsHelpers/helpers.js"),
           precompileOptions: {
             knownHelpersOnly: false,
           },
