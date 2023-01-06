@@ -11,7 +11,8 @@
     "lint": "echo 'Eslint check' && eslint '**/*.ts' && echo 'TypeScript check' && tsc --noEmit && echo 'StyleLint check' && stylelint '**/*.scss'",
     "test": "jest",
     "build": "webpack build",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "precommit": "pnpm test && pnpm lint"
   },
   "dependencies": {
     "express": "4.18.2",
